@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { MapComponent } from './components/map/map.component';
+import { AngularCesiumModule, AngularCesiumWidgetsModule, ViewerConfiguration } from 'angular-cesium';
 
 
 @NgModule({
@@ -17,10 +18,12 @@ import { MapComponent } from './components/map/map.component';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularCesiumModule.forRoot(),
+    AngularCesiumWidgetsModule
 
   ],
-  providers: [],
+  providers: [ViewerConfiguration],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
