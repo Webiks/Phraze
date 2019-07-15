@@ -1,4 +1,4 @@
-# Phaser
+# Phraze
 
 a Photo realistic navigation experience.  
 
