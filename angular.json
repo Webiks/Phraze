@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Phaser": {
+    "Phraze": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,19 +17,25 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Phaser",
+            "outputPath": "dist/Phraze",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "../node_modules/cesium/Build/Cesium",
+                "output": "./assets/cesium"
+              }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "../node_modules/cesium/Build/Cesium/Widgets/widgets.css"
             ],
-            "scripts": []
+            "scripts": ["../node_modules/cesium/Build/Cesium/Cesium.js"]
           },
           "configurations": {
             "production": {
@@ -61,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Phaser:build"
+            "browserTarget": "Phraze:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Phaser:build:production"
+              "browserTarget": "Phraze:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Phaser:build"
+            "browserTarget": "Phraze:build"
           }
         },
         "test": {
@@ -106,7 +112,7 @@
         }
       }
     },
-    "Phaser-e2e": {
+    "Phraze-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +121,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Phaser:serve"
+            "devServerTarget": "Phraze:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Phaser:serve:production"
+              "devServerTarget": "Phraze:serve:production"
             }
           }
         },
@@ -135,5 +141,5 @@
       }
     }
   },
-  "defaultProject": "Phaser"
+  "defaultProject": "Phraze"
 }
