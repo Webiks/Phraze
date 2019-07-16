@@ -1,10 +1,12 @@
 {
-  "name": "phaser",
+  "name": "phraze",
+  "description": "Photo realistic navigation experience",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --base-href=/Phraze/",
+    "publish": "ngh -d dist/phraze -S",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -52,6 +54,7 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.1.6"
+    "typescript": "~3.1.6",
+    "angular-cli-ghpages": "^0.5.3"
   }
 }
