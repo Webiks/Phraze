@@ -10,6 +10,8 @@ export class MapComponent implements OnInit {
 
   mapLayerProviderOptions = MapLayerProviderOptions;
 
+  mapid = 'map1';
+
   ionToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhMWY3MDBjYi1hM2NmLTRiY2YtYTM3My1mMTk5MjFiYTg5NDUiLCJpZ' +
     'CI6NjU0Miwic2NvcGVzIjpbImFzbCIsImFzciIsImFzdyIsImdjIl0sImFzc2V0cyI6WzIsM10sImlhdCI6MTU1MTM0NzUzNH0.iLuDmwFBzHKNiEIoYBakVCiwNS' +
     '1xZyen-2GJAZ9fjJk';
@@ -22,17 +24,14 @@ export class MapComponent implements OnInit {
   };
 
   viewerConfigurationOptions = {
-    // skyBox: false,
-    // skyAtmosphere: false,
-
+    skyBox: false,
+    skyAtmosphere: false,
     contextOptions: {
       webgl: {
         alpha: true
       }
     }
   };
-
-
 
   constructor(private mapsManagerService: MapsManagerService, viewerConfiguration: ViewerConfiguration) {
      Cesium.Ion.defaultAccessToken = this.ionToken;

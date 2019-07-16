@@ -19,6 +19,7 @@ import { AngularCesiumModule, AngularCesiumWidgetsModule, ViewerConfiguration } 
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AngularCesiumModule,
     AngularCesiumModule.forRoot(),
     AngularCesiumWidgetsModule
 
