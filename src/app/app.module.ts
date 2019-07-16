@@ -1,12 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
-import { MapComponent } from './components/map/map.component';
-import { AngularCesiumModule, AngularCesiumWidgetsModule, ViewerConfiguration } from 'angular-cesium';
+import { MatButtonModule } from '@angular/material';
+import { MapModule } from './modules/map/map.module';
 
 
 @NgModule({
@@ -14,17 +13,16 @@ import { AngularCesiumModule, AngularCesiumWidgetsModule, ViewerConfiguration } 
     AppComponent,
     ControlBarComponent,
     SearchPageComponent,
-    MapComponent
+
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AngularCesiumModule,
-    AngularCesiumModule.forRoot(),
-    AngularCesiumWidgetsModule
+    MatButtonModule,
+    MapModule
 
   ],
-  providers: [ViewerConfiguration],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
