@@ -1,0 +1,6 @@
+<ac-map [mapId]="mapId">
+  <ac-map-layer-provider [options]="providerOptions" [provider]="mapLayerProviderOptions.BingMaps">
+  </ac-map-layer-provider>
+  <app-position-display></app-position-display>
+</ac-map>
+<button mat-raised-button (click)="goToCurrentLocation()">go go</button>
