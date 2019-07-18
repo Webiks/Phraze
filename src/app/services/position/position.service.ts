@@ -13,8 +13,8 @@ export class PositionService {
     this.getPosition();
   }
 
-  private getPosition() { // TODO track position
-    navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
+  private getPosition() {
+    navigator.geolocation.watchPosition(this.setPosition.bind(this));
   }
 
   mockPos() {
