@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod --base-href=/Phraze/",
-    "publish": "ngh -d dist/phraze -S",
+    "publish": "npm run build && ngh -d dist/phraze -S",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
