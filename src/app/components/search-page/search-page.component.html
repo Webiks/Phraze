@@ -1,1 +1,11 @@
+<div class="search-container">
+  <div>Enter address</div>
+  <input matInput type="text" #searchBar name='searchBar'>
+  <button mat-raised-button (click)="getCode(searchBar.value)">Search</button>
+</div>
+<div class="results-container">
+    <div *ngIf="$searchResults">
+      {{$searchResults.lat}}{{$searchResults.lon}}
+    </div>
 
+</div>

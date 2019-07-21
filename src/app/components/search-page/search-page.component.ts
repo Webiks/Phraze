@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeocodingService } from '../../services/geocoding/geocoding.service';
 
 @Component({
   selector: 'app-search-page',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchPageComponent implements OnInit {
 
-  constructor() { }
+   $searchResults;
+
+  constructor(private geocoding: GeocodingService) { }
 
   ngOnInit() {
+
   }
+
+  getCode(address: string) {
+    this.geocoding.getGeocode(address).subscribe(data => {
+     this.$searchResults = data;
+     console.log('this is the data: ' + data.lat);
+     console.log(data);
+    });
+
+  }
+
+
+
 
 }
