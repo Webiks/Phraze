@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatInputModule } from '@angular/material';
 import { MapModule } from './modules/map/map.module';
 
 
@@ -19,10 +19,12 @@ import { MapModule } from './modules/map/map.module';
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MapModule
-
+    MapModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [
+
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
