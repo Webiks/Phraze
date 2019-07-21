@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PositionService {
+export class GeolocationService {
   lastPos: any;
   positionUpdate$: Subject<any>;
 

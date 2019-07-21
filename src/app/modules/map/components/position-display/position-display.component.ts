@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActionType, MapsManagerService } from 'angular-cesium';
 import { Observable } from 'rxjs';
-import { PositionService } from '../../../../services/position/position.service';
+import { GeolocationService } from '../../../../services/position/geo-location.service';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
@@ -15,7 +15,7 @@ export class PositionDisplayComponent implements OnInit, AfterViewInit {
   viewer;
 
 
-  constructor(private getPositionService: PositionService, private mapsManagerService: MapsManagerService) {
+  constructor(private getPositionService: GeolocationService, private mapsManagerService: MapsManagerService) {
 
     this.postionUpdate$ = getPositionService.positionUpdate$.pipe(
       tap(position => this.flyToPosition(position)),
