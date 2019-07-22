@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GeocodingService } from '../../services/geocoding/geocoding.service';
+import { GeocodingService } from '../../modules/service-providers/services/geocoding/geocoding.service';
 
 @Component({
   selector: 'app-search-page',

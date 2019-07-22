@@ -1,0 +1,9 @@
+{
+  "defaultData": {
+    "bingProviderConfig": {
+      "ApiKey": "",
+      "geoCodingUrl": "",
+      "routeUrl": ""
+    }
+  }
+}

@@ -1,9 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActionType, MapsManagerService } from 'angular-cesium';
 import { Observable } from 'rxjs';
-import { GeolocationService } from '../../../../services/position/geolocation.service';
+import { GeolocationService } from '../../../service-providers/services/position/geolocation.service';
 import { map, tap } from 'rxjs/operators';
-import { GeocodingService } from '../../../../services/geocoding/geocoding.service';
 
 @Component({
   selector: 'app-position-display',
