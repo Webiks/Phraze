@@ -13,8 +13,8 @@ export class RoutesService {
 
   getRoute(from, to): Observable<any> {
     const resultSubject = new Subject<any>();
-    const url = this.bingProviderConfig.routeUrl.replace('{from}', encodeURIComponent(from))
-      .replace('{to}', encodeURIComponent(to))
+    const url = this.bingProviderConfig.routeUrl.replace('{from}', from.latitude + ',' +  from.longitude)
+      .replace('{to}', to.lat + ',' + to.lon)
       .replace('{key}', this.bingProviderConfig.ApiKey);
     console.log(url);
     axios.get(url).then((result) => {
