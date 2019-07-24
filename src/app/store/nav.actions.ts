@@ -5,14 +5,15 @@ export enum navActionTypes {
   SET_ROUTE = 'SET ROUTE'
 }
 
-export interface SetRoutePayload { points: [[], []]; }
-export class SetRoute implements Action {
-  type = navActionTypes.SET_ROUTE;
-  constructor(public payload: SetRoutePayload) {}
+export interface SetRoutePayload {
+  points: [[]];
 }
 
-export const navActions = {
-  SetRoute
-};
+export class SetRouteAction implements Action {
+  type = navActionTypes.SET_ROUTE;
 
-export type NavActions = SetRoute;
+  constructor(public payload: SetRoutePayload) {
+  }
+}
+
+export type NavActions = SetRouteAction;

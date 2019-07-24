@@ -3,5 +3,5 @@ import { NavInterface } from '../interface/nav.interface';
 
 
 export const getNavState = createFeatureSelector<NavInterface>('nav');
-export const getNav = createSelector(getNavState, (state: NavInterface) => state);
+export const getRouteSelector = createSelector(getNavState, (state: NavInterface) => state.route);
 export const navFeatureKey = 'nav';

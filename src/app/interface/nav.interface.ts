@@ -1,6 +1,6 @@
 
 export interface NavInterface {
-  route: [[], []];
+  route: [[]];
 }
 
 
