@@ -5,11 +5,13 @@ import { AngularCesiumModule, AngularCesiumWidgetsModule, ViewerConfiguration } 
 import { PositionDisplayComponent } from './components/position-display/position-display.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material';
+import { RouteDisplayComponent } from './components/route-display/route-display.component';
 
 @NgModule({
   declarations: [
     MapComponent,
-    PositionDisplayComponent
+    PositionDisplayComponent,
+    RouteDisplayComponent
   ],
   imports: [
     CommonModule,

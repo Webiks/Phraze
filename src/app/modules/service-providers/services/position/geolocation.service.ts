@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PositionService {
+export class GeolocationService {
   lastPos: any;
   positionUpdate$: Subject<any>;
 
   constructor() {
-    this.positionUpdate$ = new Subject();
+    this.positionUpdate$ = new BehaviorSubject(undefined);
     this.getPosition();
   }
 
   private getPosition() {
-    navigator.geolocation.watchPosition(this.setPosition.bind(this));
+    navigator.geolocation.getCurrentPosition(this.setPosition.bind(this)); // todo - set options in config.json
+    navigator.geolocation.watchPosition(this.setPosition.bind(this)); // todo - set options in config.json
   }
 
   mockPos() {

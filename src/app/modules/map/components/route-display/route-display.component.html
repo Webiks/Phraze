@@ -1,0 +1,7 @@
+<ac-layer *ngIf="displayedRoute$" acFor="let polyline of displayedRoute$" [context]="this">
+  <ac-polyline-desc props="{
+  width: polyline.width,
+  positions: polyline.positions,
+  material: polyline.material
+  }"></ac-polyline-desc>
+</ac-layer>
