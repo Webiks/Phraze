@@ -8,7 +8,11 @@
       {{$searchResults.lat}}{{$searchResults.lon}}
     </div>
     <div *ngIf="$routePoints">
-      {{$routePoints.length}}
+      <ul>
+        <li *ngFor="let point of $routePoints.points">
+          {{point}}
+        </li>
+      </ul>
     </div>
 
 </div>

@@ -12,6 +12,9 @@ import { onAppInit } from './appInitializerProvider';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ConfigCoreService } from './modules/core/service/config-core.service';
 import { ViewerConfiguration } from 'angular-cesium';
+import { StoreModule } from '@ngrx/store';
+import { navFeatureKey } from './store/nav.selectors';
+import { navReducer } from './store/nav.reducer';
 
 
 @NgModule({
@@ -29,7 +32,9 @@ import { ViewerConfiguration } from 'angular-cesium';
     MatInputModule,
     HttpClientModule,
     CoreModule,
-    ServiceProvidersModule
+    ServiceProvidersModule,
+    StoreModule.forRoot({}),
+    StoreModule.forFeature(navFeatureKey, navReducer)
   ],
   providers: [
     {
