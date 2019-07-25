@@ -34,7 +34,7 @@ export class MapComponent implements OnInit {
     navigationInstructionsInitiallyVisible: false,
     geocoder: false,
     animation: false,
-    credits: false,
+    frameState: {scene: {creditDisplay: false}},
     terrainProviderViewModels: [],
     baseLayerPicker: false,
     infoBox: false,

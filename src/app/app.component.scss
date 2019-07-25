@@ -1,3 +1,16 @@
-.app-body {
+.app-container {
+  display: flex;
   height: 100%;
+  flex-direction: column;
 }
+
+.map-container {
+  flex-grow: 1;
+
+
+}
+
+.controlBarContainer {
+  margin: 10px;
+}
+

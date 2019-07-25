@@ -4,7 +4,7 @@ import { RoutesService } from '../../modules/service-providers/services/routes/r
 import { GeolocationService } from '../../modules/service-providers/services/position/geolocation.service';
 import { select, Store } from '@ngrx/store';
 import { SetRouteAction } from '../../store/nav.actions';
-import { getRouteSelector } from '../../store/nav.selectors';
+import { getRouteSelector, getShowSearchSelector } from '../../store/nav.selectors';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -17,14 +17,18 @@ export class SearchPageComponent implements OnInit {
   searchResults$;
   routePoints$;
   currentPosition;
+  isShowSearch$;
+
 
   constructor(private store: Store<any>,
               private geocodingService: GeocodingService,
               private routesService: RoutesService,
               private geolocationService: GeolocationService) {
     this.routePoints$ = this.store.pipe(
-      select(getRouteSelector),
-      tap(x => console.log(`after-select: ${JSON.stringify(x)}`))
+      select(getRouteSelector)
+    );
+    this.isShowSearch$ = this.store.pipe(
+      select(getShowSearchSelector)
     );
   }
 

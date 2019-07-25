@@ -1,13 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-#cesiumContainer {
-  width: 100%;
+
+html, body {
   height: 100%;
+  overflow: hidden;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
+
+
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$md-ams: (
+  50 : #e0f0ff,
+  100 : #b3d8ff,
+  200 : #80bfff,
+  300 : #4da5ff,
+  400 : #2691ff,
+  500 : #007eff,
+  600 : #0076ff,
+  700 : #006bff,
+  800 : #0061ff,
+  900 : #004eff,
+  A100 : #ffffff,
+  A200 : #f2f5ff,
+  A400 : #bfcfff,
+  A700 : #a6bbff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$ams-app-primary: mat-palette($md-ams);
+$ams-app-accent:  mat-palette($md-ams, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$ams-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$ams-app-theme: mat-dark-theme($ams-app-primary, $ams-app-accent, $ams-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($ams-app-theme);
 
 
