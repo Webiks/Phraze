@@ -8,13 +8,14 @@
 <!--</div>-->
 
 
+<mat-sidenav #sidenav mode="side" opened="{{isShowSearch$ | async}}" class="search-sidenav">
+  <div class="search-header">
+    <span class="x-search-button"><img src="./../../../assets/images/close.svg" (click)="onClickCloseSearch()"
+                                       width="24" height="24"></span>
+  </div>
+  <div>Enter address</div>
+  <input matInput type="text" #searchBar name='searchBar' value="בן יהודה 5 תל אביב">
+  <button mat-raised-button (click)="getCode(searchBar.value)">Search</button>
 
-
-  <mat-sidenav #sidenav mode="side" opened="{{isShowSearch$ | async}}" class="search-sidenav">
-    <div class="search-page-toolbar"><img src="./../../../assets/images/close.svg" /></div>
-    <div>Enter address</div>
-    <input matInput type="text" #searchBar name='searchBar' value="בן יהודה 5 תל אביב">
-    <button mat-raised-button (click)="getCode(searchBar.value)">Search</button>
-
-  </mat-sidenav>
+</mat-sidenav>
 

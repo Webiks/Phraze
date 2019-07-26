@@ -3,7 +3,7 @@ import { GeocodingService } from '../../modules/service-providers/services/geoco
 import { RoutesService } from '../../modules/service-providers/services/routes/routes.service';
 import { GeolocationService } from '../../modules/service-providers/services/position/geolocation.service';
 import { select, Store } from '@ngrx/store';
-import { SetRouteAction } from '../../store/nav.actions';
+import {SetRouteAction, SetShowSearchAction} from '../../store/nav.actions';
 import { getRouteSelector, getShowSearchSelector } from '../../store/nav.selectors';
 import { tap } from 'rxjs/operators';
 
@@ -51,6 +51,10 @@ export class SearchPageComponent implements OnInit {
       console.log(data);
       this.store.dispatch(new SetRouteAction(data));
     });
+  }
+
+  onClickCloseSearch() {
+    this.store.dispatch(new SetShowSearchAction({isShowSearch: false}));
   }
 
 
