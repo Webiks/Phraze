@@ -2,8 +2,8 @@
   "defaultData": {
     "bingProviderConfig": {
       "ApiKey": "",
-      "geoCodingUrl": "",
-      "routeUrl": ""
+      "geoCodingUrl": "https://dev.virtualearth.net/REST/v1/Locations?query={location}&maxResults=1&key={key",
+      "routeUrl": "https://dev.virtualearth.net/REST/v1/Routes/driving?wayPoint.1={from}&waypoint.2={to}&routeAttributes=routePath&maxSolutions=1&distanceUnit=km&key={key}"
     }
   }
 }

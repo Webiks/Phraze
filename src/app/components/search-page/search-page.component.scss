@@ -1,9 +1,5 @@
-.search-sidenav-container {
-  position: absolute;
-  top: 60px;
-  bottom: 60px;
-  left: 0;
-  right: 0;
+.search-page-toolbar {
+  height: 20px;
 }
 
 .search-sidenav {
@@ -14,16 +10,4 @@
   //background: rgba(255, 0, 0, 0.5);
 }
 
-.search-sidenav-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-}
 
-.search-sidenav-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
