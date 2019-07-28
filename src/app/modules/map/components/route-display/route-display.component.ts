@@ -24,7 +24,6 @@ export class RouteDisplayComponent implements OnInit {
   ngOnInit() {
     this.viewer = this.mapsManagerService.getMap(this.mapId).getCesiumViewer();
     this.displayedRoute$ = this.store.pipe(
-      tap(x => console.log(`pre-select routs: ${JSON.stringify(x)}`)),
       select(getRouteSelector),
       filter(Boolean),
       tap(points => {

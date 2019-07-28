@@ -14,9 +14,8 @@ export class RoutesService {
   getRoute(from, to): Observable<any> {
     const resultSubject = new Subject<any>();
     const url = this.bingProviderConfig.routeUrl.replace('{from}', from.latitude + ',' +  from.longitude)
-      .replace('{to}', to.lat + ',' + to.lon)
+      .replace('{to}', to.latitude + ',' + to.longitude)
       .replace('{key}', this.bingProviderConfig.ApiKey);
-    console.log(url);
     axios.get(url).then((result) => {
       try {
         const points = result.data.resourceSets[0].resources[0].routePath.line.coordinates;

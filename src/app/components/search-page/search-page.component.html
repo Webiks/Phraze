@@ -1,7 +1,6 @@
-
-<mat-sidenav #sidenav mode="side" opened="{{isShowSearch$ | async}}" class="search-sidenav">
+<mat-sidenav #sidenav mode="push" opened="{{isShowSearch$ | async}}" class="search-sidenav">
   <div class="search-header">
-    <span class="x-search-button"><img src="./assets/images/close.svg" (click)="onClickCloseSearch()"
+    <span class="x-search-button"><img src="./assets/images/close.svg" (click)="closeSearchPage()"
                                        width="24" height="24" alt="close"></span>
   </div>
   <form class="search-form">
@@ -9,12 +8,15 @@
       <label>
         <input matInput placeholder="Enter address" #searchBar name='searchBar' [(ngModel)]="searchAddress"/>
       </label>
-
     </mat-form-field>
     <span class="search-button-container">
-      <button mat-raised-button (click)="getCode(searchAddress)">Search</button>
+      <button mat-raised-button (click)="searchAddresses(searchAddress)">Search</button>
     </span>
   </form>
-
+  <mat-action-list #searchResultsList>
+    <button *ngFor="let entry of searchResults" mat-list-item (click)="selectDestination(entry)" >
+      {{entry.address}}
+    </button>
+  </mat-action-list>
 </mat-sidenav>
 

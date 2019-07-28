@@ -3,7 +3,7 @@ import { GeocodingService } from '../../modules/service-providers/services/geoco
 import { RoutesService } from '../../modules/service-providers/services/routes/routes.service';
 import { GeolocationService } from '../../modules/service-providers/services/position/geolocation.service';
 import { select, Store } from '@ngrx/store';
-import { SetRouteAction, SetShowSearchAction } from '../../store/nav.actions';
+import { SetActiveNavAction, SetRouteAction, SetShowSearchAction } from '../../store/nav.actions';
 import { getRouteSelector, getShowSearchSelector } from '../../store/nav.selectors';
 
 @Component({
@@ -13,11 +13,11 @@ import { getRouteSelector, getShowSearchSelector } from '../../store/nav.selecto
 })
 export class SearchPageComponent implements OnInit {
 
-  searchResults$;
+  searchResults;
   routePoints$;
   currentPosition;
   isShowSearch$;
-  searchAddress = 'בן יהודה 5 תל אביב';
+  searchAddress = 'בן יהודה 5 ';
 
 
   constructor(private store: Store<any>,
@@ -36,15 +36,18 @@ export class SearchPageComponent implements OnInit {
 
   }
 
-  getCode(address: string) {
-    this.geocodingService.getGeocode(address).subscribe(destinationCoords => {
-      this.searchResults$ = destinationCoords;
-      this.currentPosition = this.geolocationService.lastPos.coords;
-      console.log(destinationCoords.lat + ' ' + destinationCoords.lon + ' these are the destination coords');
-      this.calcRoute(this.currentPosition, destinationCoords);
+  searchAddresses(address: string) {
+    this.geocodingService.getGeocode(address).subscribe(searchResults => {
+      this.searchResults = searchResults;
     });
   }
 
+  selectDestination(entry) {
+    this.currentPosition = this.geolocationService.lastPos.coords;
+    this.calcRoute(this.currentPosition, entry.coords);
+    this.closeSearchPage();
+    this.store.dispatch(new SetActiveNavAction({isActiveNav: false}));
+  }
 
   calcRoute(from, to) {
     this.routesService.getRoute(from, to).subscribe(data => {
@@ -53,8 +56,8 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
-  onClickCloseSearch() {
-    this.store.dispatch(new SetShowSearchAction({isShowSearch: false}));
+  closeSearchPage() {
+    this.store.dispatch(new SetShowSearchAction({ isShowSearch: false }));
   }
 
 
