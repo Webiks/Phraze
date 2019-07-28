@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { SetShowSearchAction } from '../../store/nav.actions';
 
 @Component({
   selector: 'app-control-bar',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ControlBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<any>) { }
 
   ngOnInit() {
+  }
+
+  onClickOpenSearch() {
+    this.store.dispatch(new SetShowSearchAction({isShowSearch: true}));
   }
 
 }

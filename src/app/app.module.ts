@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
-import { MatButtonModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import { MapModule } from './modules/map/map.module';
 import { CoreModule } from './modules/core/core.module';
 import { ServiceProvidersModule } from './modules/service-providers/service-providers.module';
@@ -15,6 +15,7 @@ import { ViewerConfiguration } from 'angular-cesium';
 import { StoreModule } from '@ngrx/store';
 import { navFeatureKey } from './store/nav.selectors';
 import { navReducer } from './store/nav.reducer';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -34,7 +35,10 @@ import { navReducer } from './store/nav.reducer';
     CoreModule,
     ServiceProvidersModule,
     StoreModule.forRoot({}),
-    StoreModule.forFeature(navFeatureKey, navReducer)
+    StoreModule.forFeature(navFeatureKey, navReducer),
+    MatToolbarModule,
+    MatSidenavModule,
+    FormsModule
   ],
   providers: [
     {
