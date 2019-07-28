@@ -1533,8 +1533,12 @@ MIT
 @angular/platform-browser
 MIT
 
+@angular/material/sidenav
+
 @angular/forms
 MIT
+
+@angular/material/form-field
 
 @angular/material/button
 
