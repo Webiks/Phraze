@@ -4,7 +4,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 280px;
+  width: 90%;
+  max-width: 400px;
+
 }
 
 .search-header {
@@ -13,14 +15,11 @@
 }
 
 .search-input {
-  display: flex;
-  justify-content: center;
+  padding: 10px;
 }
 
 .search-button-container {
-  display: flex;
-  flex-direction: row-reverse;
-  padding: 10px;
+
 }
 
 
