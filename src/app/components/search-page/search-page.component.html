@@ -1,12 +1,3 @@
-1<!--<div class="search-container">-->
-
-<!--</div>-->
-<!--<div class="results-container">-->
-<!--  <div *ngIf="searchResults$">-->
-<!--    {{searchResults$.lat}}{{searchResults$.lon}}-->
-<!--  </div>-->
-<!--</div>-->
-
 
 <mat-sidenav #sidenav mode="side" opened="{{isShowSearch$ | async}}" class="search-sidenav">
   <div class="search-header">
@@ -16,11 +7,11 @@
   <form class="search-form">
     <mat-form-field class="search-input">
       <label>
-        <input matInput placeholder="Enter address" #searchBar name='searchBar' [(ngModel)]="searchAdress"/>
+        <input matInput placeholder="Enter address" #searchBar name='searchBar' [(ngModel)]="searchAddress"/>
       </label>
     </mat-form-field>
     <span class="search-button-container">
-      <button mat-raised-button (click)="getCode(searchAdress)">Search</button>
+      <button mat-raised-button (click)="getCode(searchAddress)">Search</button>
     </span>
   </form>
 

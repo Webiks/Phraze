@@ -17,7 +17,7 @@ export class SearchPageComponent implements OnInit {
   routePoints$;
   currentPosition;
   isShowSearch$;
-  searchAdress = 'בן יהודה 5 תל אביב';
+  searchAddress = 'בן יהודה 5 תל אביב';
 
 
   constructor(private store: Store<any>,
