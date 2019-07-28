@@ -13,6 +13,7 @@ export class MapComponent implements OnInit {
   mapId = 'map1';
   viewer;
 
+
   ionToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhMWY3MDBjYi1hM2NmLTRiY2YtYTM3My1mMTk5MjFiYTg5NDUiLCJpZ' +
     'CI6NjU0Miwic2NvcGVzIjpbImFzbCIsImFzciIsImFzdyIsImdjIl0sImFzc2V0cyI6WzIsM10sImlhdCI6MTU1MTM0NzUzNH0.iLuDmwFBzHKNiEIoYBakVCiwNS' +
     '1xZyen-2GJAZ9fjJk';

@@ -3,9 +3,8 @@ import { GeocodingService } from '../../modules/service-providers/services/geoco
 import { RoutesService } from '../../modules/service-providers/services/routes/routes.service';
 import { GeolocationService } from '../../modules/service-providers/services/position/geolocation.service';
 import { select, Store } from '@ngrx/store';
-import {SetRouteAction, SetShowSearchAction} from '../../store/nav.actions';
+import { SetRouteAction, SetShowSearchAction } from '../../store/nav.actions';
 import { getRouteSelector, getShowSearchSelector } from '../../store/nav.selectors';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-page',
@@ -18,6 +17,7 @@ export class SearchPageComponent implements OnInit {
   routePoints$;
   currentPosition;
   isShowSearch$;
+  searchAdress = 'בן יהודה 5 תל אביב';
 
 
   constructor(private store: Store<any>,

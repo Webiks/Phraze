@@ -15,6 +15,7 @@ import { ViewerConfiguration } from 'angular-cesium';
 import { StoreModule } from '@ngrx/store';
 import { navFeatureKey } from './store/nav.selectors';
 import { navReducer } from './store/nav.reducer';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { navReducer } from './store/nav.reducer';
     StoreModule.forRoot({}),
     StoreModule.forFeature(navFeatureKey, navReducer),
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule
   ],
   providers: [
     {
