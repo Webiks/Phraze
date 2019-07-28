@@ -25,8 +25,8 @@ export class ControlBarComponent implements OnInit {
     this.store.pipe(
       select(getRouteSelector),
       tap(route => {
-        const from = route[0];
-        const to = route[route.length - 1];
+        const from = <any>route[0];
+        const to = <any>route[route.length - 1];
         window.addEventListener('message', handleGetRouteCallback);
         window.postMessage({
             type: 'getRoute',
