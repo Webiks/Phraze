@@ -1,4 +1,4 @@
-<!--<div class="search-container">-->
+1<!--<div class="search-container">-->
 
 <!--</div>-->
 <!--<div class="results-container">-->
@@ -10,14 +10,18 @@
 
 <mat-sidenav #sidenav mode="side" opened="{{isShowSearch$ | async}}" class="search-sidenav">
   <div class="search-header">
-    <span class="x-search-button"><img src="./../../../assets/images/close.svg" (click)="onClickCloseSearch()"
-                                       width="24" height="24"></span>
+    <span class="x-search-button"><img src="../../../assets/images/close.svg" (click)="onClickCloseSearch()"
+                                       width="24" height="24" alt="close"></span>
   </div>
   <form class="search-form">
     <mat-form-field class="search-input">
-    <input matInput placeholder="Enter address" #searchBar name='searchBar' [(ngModel)]="searchAdress" />
+      <label>
+        <input matInput placeholder="Enter address" #searchBar name='searchBar' [(ngModel)]="searchAdress"/>
+      </label>
     </mat-form-field>
-    <button mat-raised-button (click)="getCode(searchAdress)">Search</button>
+    <span class="search-button-container">
+      <button mat-raised-button (click)="getCode(searchAdress)">Search</button>
+    </span>
   </form>
 
 </mat-sidenav>
