@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { SetActiveNavAction, SetShowSearchAction } from '../../store/nav.actions';
-import { getRouteSelector } from '../../store/nav.selectors';
+import { routePointSelector, routeSelector } from '../../store/nav.selectors';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -23,7 +23,7 @@ export class ControlBarComponent implements OnInit {
   startNavigation() {
     this.store.dispatch(new SetActiveNavAction({isActiveNav: true}));
     this.store.pipe(
-      select(getRouteSelector),
+      select(routePointSelector),
       tap(route => {
         const from = <any>route[0];
         const to = <any>route[route.length - 1];

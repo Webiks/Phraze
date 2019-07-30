@@ -4,7 +4,7 @@ import { RoutesService } from '../../modules/service-providers/services/routes/r
 import { GeolocationService } from '../../modules/service-providers/services/position/geolocation.service';
 import { select, Store } from '@ngrx/store';
 import { SetActiveNavAction, SetRouteAction, SetShowSearchAction } from '../../store/nav.actions';
-import { getRouteSelector, getShowSearchSelector } from '../../store/nav.selectors';
+import { routeSelector, getShowSearchSelector, routePointSelector } from '../../store/nav.selectors';
 
 @Component({
   selector: 'app-search-page',
@@ -25,7 +25,7 @@ export class SearchPageComponent implements OnInit {
               private routesService: RoutesService,
               private geolocationService: GeolocationService) {
     this.routePoints$ = this.store.pipe(
-      select(getRouteSelector)
+      select(routePointSelector)
     );
     this.isShowSearch$ = this.store.pipe(
       select(getShowSearchSelector)

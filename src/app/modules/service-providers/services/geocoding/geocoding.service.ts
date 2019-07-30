@@ -23,11 +23,8 @@ export class GeocodingService {
     axios.get(url)
       .then((result) => {
         try {
-          // const coords = entry.data.resourceSets[0].resources[0].point.coordinates;
-          // resultSubject.next({ lat: coords[0], lon: coords[1] });
           const entries = [];
           for (let i = 0; i < result.data.resourceSets[0].estimatedTotal; i++ ) {
-            console.log(i + ' iteration');
             const entry = result.data.resourceSets[0].resources[i];
             const coords = entry.point.coordinates;
             const address = `${entry.address.addressLine}, ${entry.address.locality}`;
