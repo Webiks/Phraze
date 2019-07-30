@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { SetShowSearchAction } from '../../store/nav.actions';
+import { select, Store } from '@ngrx/store';
+import { SetActiveNavAction, SetShowSearchAction } from '../../store/nav.actions';
+import { routePointSelector, routeSelector } from '../../store/nav.selectors';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-control-bar',
@@ -14,8 +16,41 @@ export class ControlBarComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClickOpenSearch() {
+  openSearchPage() {
     this.store.dispatch(new SetShowSearchAction({isShowSearch: true}));
+  }
+
+  startNavigation() {
+    this.store.dispatch(new SetActiveNavAction({isActiveNav: true}));
+    this.store.pipe(
+      select(routePointSelector),
+      tap(route => {
+        const from = <any>route[0];
+        const to = <any>route[route.length - 1];
+        window.addEventListener('message', handleGetRouteCallback);
+        window.postMessage({
+            type: 'getRoute',
+            from: `${from[0]},${from[1]}`,
+            to: `${to[0]},${to[1]}`
+          },
+          '*');
+      })
+    ).subscribe();
+
+    function handleGetRouteCallback(event) {
+      if (!event || !event.data || event.data.type !== 'getRouteCallback') {
+        return;
+      }
+      window.removeEventListener('message', handleGetRouteCallback);
+      window.postMessage({
+          type: 'playRoute',
+          playbackRate: 1.5
+        },
+        '*');
+    }
+
+
+
   }
 
 }

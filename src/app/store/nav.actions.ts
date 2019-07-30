@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { RouteDetails } from '../interface/nav.interface';
 
 
 export enum navActionTypes {
@@ -7,7 +8,7 @@ export enum navActionTypes {
   SET_SHOW_SEARCH = 'SET SHOW SEARCH'
 }
 
-export interface SetRoutePayload {points: [[]]; }
+export interface SetRoutePayload {routeDetails: RouteDetails; }
 export class SetRouteAction implements Action {
   type = navActionTypes.SET_ROUTE;
   constructor(public payload: SetRoutePayload) {

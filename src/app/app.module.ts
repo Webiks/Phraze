@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
-import { MatButtonModule, MatInputModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatListModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import { MapModule } from './modules/map/map.module';
 import { CoreModule } from './modules/core/core.module';
 import { ServiceProvidersModule } from './modules/service-providers/service-providers.module';
@@ -38,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     StoreModule.forFeature(navFeatureKey, navReducer),
     MatToolbarModule,
     MatSidenavModule,
-    FormsModule
+    FormsModule,
+    MatListModule
   ],
   providers: [
     {

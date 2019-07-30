@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
     "@ngrx/store": "^8.1.0",
+    "@turf/turf": "^5.1.6",
     "angular-cesium": "0.0.56",
     "axios": "^0.19.0",
     "cesium": "^1.59.0",
