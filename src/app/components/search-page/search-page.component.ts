@@ -3,8 +3,8 @@ import { GeocodingService } from '../../modules/service-providers/services/geoco
 import { RoutesService } from '../../modules/service-providers/services/routes/routes.service';
 import { GeolocationService } from '../../modules/service-providers/services/position/geolocation.service';
 import { select, Store } from '@ngrx/store';
-import { SetActiveNavAction, SetRouteAction, SetShowSearchAction } from '../../store/nav.actions';
-import { routeSelector, getShowSearchSelector, routePointSelector } from '../../store/nav.selectors';
+import { SetActivePosAction, SetRouteAction, SetShowSearchAction } from '../../store/nav.actions';
+import { getShowSearchSelector, routePointSelector } from '../../store/nav.selectors';
 
 @Component({
   selector: 'app-search-page',
@@ -46,7 +46,7 @@ export class SearchPageComponent implements OnInit {
     this.currentPosition = this.geolocationService.lastPos.coords;
     this.calcRoute(this.currentPosition, entry.coords);
     this.closeSearchPage();
-    this.store.dispatch(new SetActiveNavAction({isActiveNav: false}));
+    this.store.dispatch(new SetActivePosAction({isActivePos: false}));
   }
 
   calcRoute(from, to) {

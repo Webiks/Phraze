@@ -1,5 +1,5 @@
-import { NavInterface, RouteDetails } from '../interface/nav.interface';
-import { NavActions, navActionTypes, SetActiveNavAction, SetRouteAction, SetShowSearchAction } from './nav.actions';
+import { NavInterface } from '../interface/nav.interface';
+import { NavActions, navActionTypes, SetActivePosAction, SetNavInProgressAction, SetRouteAction, SetShowSearchAction } from './nav.actions';
 
 
 export const NavState: NavInterface = {
@@ -9,8 +9,9 @@ export const NavState: NavInterface = {
     routeLength: null,
     routeLegs: [{ coords: null, index: null, text: null }]
   },
-  isActiveNav: true,
-  isShowSearch: false
+  isActivePos: true,
+  isShowSearch: false,
+  isNavInProgress: false
 };
 
 export function navReducer(state = NavState, action: NavActions): NavInterface {
@@ -19,13 +20,17 @@ export function navReducer(state = NavState, action: NavActions): NavInterface {
       const routeDetails = (action as SetRouteAction).payload.routeDetails;
       return { ...state, routeDetails: routeDetails };
     }
-    case navActionTypes.SET_ACTIVE_NAV: {
-      const isActiveNav = (action as SetActiveNavAction).payload.isActiveNav;
-      return { ...state, isActiveNav };
+    case navActionTypes.SET_ACTIVE_POS: {
+      const isActiveNav = (action as SetActivePosAction).payload.isActivePos;
+      return { ...state, isActivePos: isActiveNav };
     }
     case navActionTypes.SET_SHOW_SEARCH: {
       const isShowSearch = (action as SetShowSearchAction).payload.isShowSearch;
       return { ...state, isShowSearch };
+    }
+    case navActionTypes.SET_NAV_IN_PROGRESS: {
+      const isNavInProgress = (action as SetNavInProgressAction).payload.isNavInProgress;
+      return { ...state, isNavInProgress};
     }
     default:
       return state;

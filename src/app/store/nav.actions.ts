@@ -4,8 +4,9 @@ import { RouteDetails } from '../interface/nav.interface';
 
 export enum navActionTypes {
   SET_ROUTE = 'SET ROUTE',
-  SET_ACTIVE_NAV = 'SET ACTIVE NAV',
-  SET_SHOW_SEARCH = 'SET SHOW SEARCH'
+  SET_ACTIVE_POS = 'SET ACTIVE POS',
+  SET_SHOW_SEARCH = 'SET SHOW SEARCH',
+  SET_NAV_IN_PROGRESS = 'SET NAV IN PROGRESS'
 }
 
 export interface SetRoutePayload {routeDetails: RouteDetails; }
@@ -15,10 +16,10 @@ export class SetRouteAction implements Action {
   }
 }
 
-export interface SetActiveNavPayload {isActiveNav: boolean; }
-export class SetActiveNavAction implements Action {
-  type = navActionTypes.SET_ACTIVE_NAV;
-  constructor(public payload: SetActiveNavPayload) {
+export interface SetActivePosPayload {isActivePos: boolean; }
+export class SetActivePosAction implements Action {
+  type = navActionTypes.SET_ACTIVE_POS;
+  constructor(public payload: SetActivePosPayload) {
   }
 }
 
@@ -30,4 +31,14 @@ export class SetShowSearchAction implements Action {
   }
 }
 
-export type NavActions = SetRouteAction | SetActiveNavAction | SetShowSearchAction;
+export interface SetNavInProgressPayload {isNavInProgress: boolean; }
+export class SetNavInProgressAction implements Action {
+  type = navActionTypes.SET_NAV_IN_PROGRESS;
+  constructor(public payload: SetNavInProgressPayload) {
+  }
+}
+
+export type NavActions =  SetRouteAction |
+                          SetActivePosAction |
+                          SetShowSearchAction |
+                          SetNavInProgressAction;

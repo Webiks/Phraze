@@ -1,8 +1,9 @@
 
 export interface NavInterface {
   routeDetails: RouteDetails;
-  isActiveNav: boolean;
+  isActivePos: boolean;
   isShowSearch: boolean;
+  isNavInProgress: boolean;
 }
 
 export interface RouteDetails {

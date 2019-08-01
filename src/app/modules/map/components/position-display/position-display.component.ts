@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { GeolocationService } from '../../../service-providers/services/position/geolocation.service';
 import { combineLatest, filter, map, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { getActiveNavSelector } from '../../../../store/nav.selectors';
+import { getActivePosSelector } from '../../../../store/nav.selectors';
 
 @Component({
   selector: 'app-position-display',
@@ -23,7 +23,7 @@ export class PositionDisplayComponent implements OnInit, AfterViewInit {
   ) {
 
     this.postionUpdate$ = geolocationService.positionUpdate$.pipe(
-      combineLatest(this.store.pipe(select(getActiveNavSelector))),
+      combineLatest(this.store.pipe(select(getActivePosSelector))),
       map(data => ({ position: data[0], isActiveNav: data[1] })),
       filter(({ position, isActiveNav }) => position !== undefined && isActiveNav),
       map(({ position }) => position),
