@@ -1,9 +1,9 @@
 
 export interface NavInterface {
   routeDetails: RouteDetails;
-  isActivePos: boolean;
+  phrazeState: PhrazeState;
   isShowSearch: boolean;
-  isNavInProgress: boolean;
+
 }
 
 export interface RouteDetails {
@@ -17,5 +17,11 @@ export interface LegDetails {
   index: number;
   coords: [];
   text: string;
+}
+
+export enum PhrazeState {
+  IDLE = 'IDLE',
+  PREVIEW = 'PREVIEW',
+  NAVIGATION = 'NAVIGATION'
 }
 

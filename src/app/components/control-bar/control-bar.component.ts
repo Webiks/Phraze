@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { SetActivePosAction, SetShowSearchAction } from '../../store/nav.actions';
+import { SetPhrazeStateAction, SetShowSearchAction } from '../../store/nav.actions';
 import { routePointSelector } from '../../store/nav.selectors';
 import { tap } from 'rxjs/operators';
+import { PhrazeState } from '../../interface/nav.interface';
 
 @Component({
   selector: 'app-control-bar',
@@ -21,7 +22,7 @@ export class ControlBarComponent implements OnInit {
   }
 
   startNavigation() {
-    this.store.dispatch(new SetActivePosAction({isActivePos: true}));
+    this.store.dispatch(new SetPhrazeStateAction({phrazeState: PhrazeState.NAVIGATION}));
     this.store.pipe(
       select(routePointSelector),
       tap(route => {

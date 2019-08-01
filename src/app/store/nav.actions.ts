@@ -1,12 +1,12 @@
 import { Action } from '@ngrx/store';
-import { RouteDetails } from '../interface/nav.interface';
+import { PhrazeState, RouteDetails } from '../interface/nav.interface';
 
 
 export enum navActionTypes {
   SET_ROUTE = 'SET ROUTE',
-  SET_ACTIVE_POS = 'SET ACTIVE POS',
+  SET_PHRAZE_STATE = 'SET PHRAZE STATE',
   SET_SHOW_SEARCH = 'SET SHOW SEARCH',
-  SET_NAV_IN_PROGRESS = 'SET NAV IN PROGRESS'
+
 }
 
 export interface SetRoutePayload {routeDetails: RouteDetails; }
@@ -16,10 +16,10 @@ export class SetRouteAction implements Action {
   }
 }
 
-export interface SetActivePosPayload {isActivePos: boolean; }
-export class SetActivePosAction implements Action {
-  type = navActionTypes.SET_ACTIVE_POS;
-  constructor(public payload: SetActivePosPayload) {
+export interface SetPhrazeStatePayload {phrazeState: PhrazeState; }
+export class SetPhrazeStateAction implements Action {
+  type = navActionTypes.SET_PHRAZE_STATE;
+  constructor(public payload: SetPhrazeStatePayload) {
   }
 }
 
@@ -31,14 +31,6 @@ export class SetShowSearchAction implements Action {
   }
 }
 
-export interface SetNavInProgressPayload {isNavInProgress: boolean; }
-export class SetNavInProgressAction implements Action {
-  type = navActionTypes.SET_NAV_IN_PROGRESS;
-  constructor(public payload: SetNavInProgressPayload) {
-  }
-}
-
 export type NavActions =  SetRouteAction |
-                          SetActivePosAction |
-                          SetShowSearchAction |
-                          SetNavInProgressAction;
+                          SetPhrazeStateAction |
+                          SetShowSearchAction;
