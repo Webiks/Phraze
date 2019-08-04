@@ -1,5 +1,12 @@
 import { NavInterface, PhrazeState } from '../interface/nav.interface';
-import { NavActions, navActionTypes, SetPhrazeStateAction, SetRouteAction, SetShowSearchAction } from './nav.actions';
+import {
+  NavActions,
+  navActionTypes,
+  SetCurrentPositionAction,
+  SetPhrazeStateAction,
+  SetRouteAction,
+  SetShowSearchAction
+} from './nav.actions';
 
 
 export const NavState: NavInterface = {
@@ -10,8 +17,8 @@ export const NavState: NavInterface = {
     routeLegs: [{ coords: null, index: null, text: null }]
   },
   phrazeState: PhrazeState.IDLE,
-  isShowSearch: false
-
+  isShowSearch: false,
+  currentPosition: {lat: null, lon: null}
 };
 
 export function navReducer(state = NavState, action: NavActions): NavInterface {
@@ -28,7 +35,10 @@ export function navReducer(state = NavState, action: NavActions): NavInterface {
       const isShowSearch = (action as SetShowSearchAction).payload.isShowSearch;
       return { ...state, isShowSearch };
     }
-
+    case navActionTypes.SET_CURRENT_POSITION: {
+      const currentPosition = (action as SetCurrentPositionAction).payload.currentPosition;
+      return { ...state, currentPosition };
+    }
     default:
       return state;
   }

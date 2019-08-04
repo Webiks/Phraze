@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { GeolocationService } from '../../../service-providers/services/position/geolocation.service';
 import { combineLatest, filter, map, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { phrazeStateSelector } from '../../../../store/nav.selectors';
+import { currentPositionSelector, phrazeStateSelector } from '../../../../store/nav.selectors';
 import { PhrazeState } from '../../../../interface/nav.interface';
 
 @Component({
@@ -23,10 +23,10 @@ export class PositionDisplayComponent implements OnInit, AfterViewInit {
               private store: Store<any>
   ) {
 
-    this.postionUpdate$ = geolocationService.positionUpdate$.pipe(
+    this.postionUpdate$ = this.store.pipe(select(currentPositionSelector),
       combineLatest(this.store.pipe(select(phrazeStateSelector))),
       map(data => ({ position: data[0], phrazeState: data[1] })),
-      filter(({ position, phrazeState }) => position !== undefined && phrazeState !== PhrazeState.PREVIEW),
+      filter(({ position, phrazeState }) => position.lat !== null && phrazeState !== PhrazeState.PREVIEW),
       map(({ position }) => position),
       tap(position => this.flyToPosition(position)),
       map(position => {

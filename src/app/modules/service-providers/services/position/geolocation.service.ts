@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { SetCurrentPositionAction } from '../../../../store/nav.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeolocationService {
   lastPos: any;
-  positionUpdate$: Subject<any>;
 
-  constructor() {
-    this.positionUpdate$ = new BehaviorSubject(undefined);
+  constructor(private store: Store<any>) {
     this.getPosition();
   }
 
@@ -29,8 +28,7 @@ export class GeolocationService {
 
   setPosition(position) {
     this.lastPos = position;
-    this.positionUpdate$.next({lat: position.coords.latitude, lon: position.coords.longitude});
-
-    // setTimeout(this.mockPos.bind(this), 2000);
+    this.store.dispatch(new SetCurrentPositionAction({currentPosition: {lat: position.coords.latitude,
+                                                                                lon: position.coords.longitude}}));
   }
 }

@@ -3,7 +3,7 @@ export interface NavInterface {
   routeDetails: RouteDetails;
   phrazeState: PhrazeState;
   isShowSearch: boolean;
-
+  currentPosition: {lat: number, lon: number};
 }
 
 export interface RouteDetails {
