@@ -6,7 +6,9 @@ export enum navActionTypes {
   SET_ROUTE = 'SET ROUTE',
   SET_PHRAZE_STATE = 'SET PHRAZE STATE',
   SET_SHOW_SEARCH = 'SET SHOW SEARCH',
-  SET_CURRENT_POSITION = 'SET CURRENT POSITION'
+  SET_CURRENT_POSITION = 'SET CURRENT POSITION',
+  SET_NEXT_WAYPOINT_INDEX = 'SET NEXT WAYPOINT INDEX',
+  SET_NEXT_WAYPOINT_DISTANCE = 'SET NEXT WAYPOINT DISTANCE'
 }
 
 export interface SetRoutePayload {routeDetails: RouteDetails; }
@@ -30,14 +32,30 @@ export class SetShowSearchAction implements Action {
   }
 }
 
-export interface SetCurrentPositionPayload {currentPosition: {lat: number, lon: number}; }
+export interface SetCurrentPositionPayload {currentPosition: {latitude: number, longitude: number}; }
 export class SetCurrentPositionAction implements Action {
   type = navActionTypes.SET_CURRENT_POSITION;
   constructor(public payload: SetCurrentPositionPayload) {
   }
 }
 
+export interface SetNextWaypointOndexPayload {nextWaypointIndex: number; }
+export class SetNextWaypointIndexAction implements Action {
+  type = navActionTypes.SET_NEXT_WAYPOINT_INDEX;
+  constructor(public payload: SetNextWaypointOndexPayload) {
+  }
+}
+
+export interface SetNextWaypointDistancePayload {nextWaypointDistance: number; }
+export class SetNextWaypointDistanceAction implements Action {
+  type = navActionTypes.SET_NEXT_WAYPOINT_DISTANCE;
+  constructor(public payload: SetNextWaypointDistancePayload) {
+  }
+}
+
 export type NavActions =  SetRouteAction |
                           SetPhrazeStateAction |
                           SetShowSearchAction |
-                          SetCurrentPositionAction;
+                          SetCurrentPositionAction |
+                          SetNextWaypointIndexAction |
+                          SetNextWaypointDistanceAction;

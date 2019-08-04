@@ -6,7 +6,6 @@ import { SetCurrentPositionAction } from '../../../../store/nav.actions';
   providedIn: 'root'
 })
 export class GeolocationService {
-  lastPos: any;
 
   constructor(private store: Store<any>) {
     this.getPosition();
@@ -17,18 +16,8 @@ export class GeolocationService {
     navigator.geolocation.watchPosition(this.setPosition.bind(this)); // todo - set options in config.json
   }
 
-  mockPos() {
-    this.setPosition({
-      coords: {
-        latitude: this.lastPos.coords.latitude,
-        longitude: this.lastPos.coords.longitude + 0.0001,
-      }
-    });
-  }
-
   setPosition(position) {
-    this.lastPos = position;
-    this.store.dispatch(new SetCurrentPositionAction({currentPosition: {lat: position.coords.latitude,
-                                                                                lon: position.coords.longitude}}));
+    this.store.dispatch(new SetCurrentPositionAction({currentPosition: {latitude: position.coords.latitude,
+                                                                                longitude: position.coords.longitude}}));
   }
 }

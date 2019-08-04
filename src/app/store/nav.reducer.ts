@@ -2,7 +2,7 @@ import { NavInterface, PhrazeState } from '../interface/nav.interface';
 import {
   NavActions,
   navActionTypes,
-  SetCurrentPositionAction,
+  SetCurrentPositionAction, SetNextWaypointDistanceAction, SetNextWaypointIndexAction,
   SetPhrazeStateAction,
   SetRouteAction,
   SetShowSearchAction
@@ -18,7 +18,9 @@ export const NavState: NavInterface = {
   },
   phrazeState: PhrazeState.IDLE,
   isShowSearch: false,
-  currentPosition: {lat: null, lon: null}
+  currentPosition: { latitude: null, longitude: null },
+  nextWaypointIndex: null,
+  nextWaypointDistance: null
 };
 
 export function navReducer(state = NavState, action: NavActions): NavInterface {
@@ -38,6 +40,14 @@ export function navReducer(state = NavState, action: NavActions): NavInterface {
     case navActionTypes.SET_CURRENT_POSITION: {
       const currentPosition = (action as SetCurrentPositionAction).payload.currentPosition;
       return { ...state, currentPosition };
+    }
+    case navActionTypes.SET_NEXT_WAYPOINT_INDEX: {
+      const nextWaypointIndex = (action as SetNextWaypointIndexAction).payload.nextWaypointIndex;
+      return { ...state, nextWaypointIndex: nextWaypointIndex };
+    }
+    case navActionTypes.SET_NEXT_WAYPOINT_DISTANCE: {
+      const nextWaypointDistance = (action as SetNextWaypointDistanceAction).payload.nextWaypointDistance;
+      return { ...state, nextWaypointDistance: nextWaypointDistance };
     }
     default:
       return state;

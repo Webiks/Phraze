@@ -3,7 +3,9 @@ export interface NavInterface {
   routeDetails: RouteDetails;
   phrazeState: PhrazeState;
   isShowSearch: boolean;
-  currentPosition: {lat: number, lon: number};
+  currentPosition: GeoPosition;
+  nextWaypointIndex: number;
+  nextWaypointDistance: number;
 }
 
 export interface RouteDetails {
@@ -24,4 +26,10 @@ export enum PhrazeState {
   PREVIEW = 'PREVIEW',
   NAVIGATION = 'NAVIGATION'
 }
+
+export interface GeoPosition {
+  latitude: number;
+  longitude: number;
+}
+
 

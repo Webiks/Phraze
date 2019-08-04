@@ -14,7 +14,6 @@ export class RoutesService {
   constructor(@Inject(BINGPROVIDER_CONFIG) public bingProviderConfig: BingProviderInterface) { }
 
   getRoute(from, to): Observable<any> {
-
     function mapLegs(rawLegs): Array<LegDetails> {
       const mapedLegs = new Array<LegDetails>();
       rawLegs.forEach(leg => {
