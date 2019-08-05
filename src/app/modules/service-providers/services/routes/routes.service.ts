@@ -43,7 +43,6 @@ export class RoutesService {
           roundCoordinate(mapedLegs[j].coords[1]) === roundCoordinate(linePoints[i][1])) {
           mapedLegs[j].index = i;
           j++;
-          console.log('found coordinate with index ' + i);
         }
       }
       return mapedLegs;

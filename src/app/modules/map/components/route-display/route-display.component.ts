@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { routePointSelector, routeSelector } from '../../../../store/nav.selectors';
+import { routePointsSelector } from '../../../../store/nav.selectors';
 import { filter, map, tap } from 'rxjs/operators';
 import { ActionType, MapsManagerService } from 'angular-cesium';
 import { extractBoundingBox, flatenArrayOfArray, inflateBoundingBox, swapCoordinates } from '../../../../utils/utils';
@@ -24,7 +24,7 @@ export class RouteDisplayComponent implements OnInit {
   ngOnInit() {
     this.viewer = this.mapsManagerService.getMap(this.mapId).getCesiumViewer();
     this.displayedRoute$ = this.store.pipe(
-      select(routePointSelector),
+      select(routePointsSelector),
       filter(Boolean),
       tap(points => {
         let boundingBox = extractBoundingBox(points);

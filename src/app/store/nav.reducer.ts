@@ -11,7 +11,7 @@ import {
 
 export const NavState: NavInterface = {
   routeDetails: {
-    routePoints: [[]],
+    routePoints: null,
     routeDuration: null,
     routeLength: null,
     routeLegs: [{ coords: null, index: null, text: null }]

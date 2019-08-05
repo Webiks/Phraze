@@ -3,7 +3,7 @@ import { GeocodingService } from '../../modules/service-providers/services/geoco
 import { RoutesService } from '../../modules/service-providers/services/routes/routes.service';
 import { select, Store } from '@ngrx/store';
 import { SetPhrazeStateAction, SetRouteAction, SetShowSearchAction } from '../../store/nav.actions';
-import { currentPositionSelector, getShowSearchSelector, routePointSelector } from '../../store/nav.selectors';
+import { currentPositionSelector, getShowSearchSelector, routePointsSelector } from '../../store/nav.selectors';
 import { PhrazeState } from '../../interface/nav.interface';
 import { take, tap } from 'rxjs/operators';
 
@@ -24,7 +24,7 @@ export class SearchPageComponent implements OnInit {
               private geocodingService: GeocodingService,
               private routesService: RoutesService) {
     this.routePoints$ = this.store.pipe(
-      select(routePointSelector)
+      select(routePointsSelector)
     );
     this.isShowSearch$ = this.store.pipe(
       select(getShowSearchSelector)
