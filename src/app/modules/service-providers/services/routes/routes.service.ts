@@ -62,7 +62,7 @@ export class RoutesService {
       try {
         const routeBase = result.data.resourceSets[0].resources[0];
         routeDetails.routePoints = routeBase.routePath.line.coordinates;
-        routeDetails.routeLength = routeBase.travelDistance;
+        routeDetails.routeLength = routeBase.travelDistance * 1000;
         routeDetails.routeDuration = routeBase.travelDuration;
         routeDetails.routeLegs = mapLegs(routeBase.routeLegs[0].itineraryItems);
         routeDetails.routeLegs = indexLegs(routeDetails.routeLegs, routeDetails.routePoints);

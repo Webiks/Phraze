@@ -10,4 +10,5 @@ export const phrazeStateSelector = createSelector(getNavState, (state: NavInterf
 export const currentPositionSelector = createSelector(getNavState, (state: NavInterface) => state.currentPosition);
 export const nextWaypointIndexSelector = createSelector(getNavState, (state: NavInterface) => state.nextWaypointIndex);
 export const nextWaypointDistanceSelector = createSelector(getNavState, (state: NavInterface) => state.nextWaypointDistance);
+export const distanceToEndpointSelector = createSelector(getNavState, (state: NavInterface) => state.distanceToEndpoint);
 export const navFeatureKey = 'nav';

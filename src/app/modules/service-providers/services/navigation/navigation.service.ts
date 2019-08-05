@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { lineString, nearestPointOnLine, point } from '@turf/turf';
+import { lineSlice, lineString, nearestPointOnLine, point, length } from '@turf/turf';
 import {
   currentPositionSelector,
   nextWaypointIndexSelector,
@@ -8,7 +8,7 @@ import {
   routePointsSelector
 } from '../../../../store/nav.selectors';
 import { filter, tap, withLatestFrom } from 'rxjs/operators';
-import { SetNextWaypointIndexAction } from '../../../../store/nav.actions';
+import { SetDistanceToEndpointAction, SetNextWaypointDistanceAction, SetNextWaypointIndexAction } from '../../../../store/nav.actions';
 
 
 @Injectable({
@@ -31,18 +31,27 @@ export class NavigationService {
         const currentPositionOnRoute = nearestPointOnLine(lineString(routePoints), point([currentPosition.latitude,
           currentPosition.longitude
         ]));
+        this.store.dispatch(new SetDistanceToEndpointAction({
+          distanceToEndpoint:
+            (routeDetails.routeLength - (currentPositionOnRoute.properties.location * 1000))
+        }));
+        console.log('remaining distance: ' + (routeDetails.routeLength - (currentPositionOnRoute.properties.location * 1000)));
         let newNextWpIndex = nextWpIndex;
-
         while (newNextWpIndex < routeDetails.routeLegs.length - 1 &&
         routeDetails.routeLegs[newNextWpIndex].index <= currentPositionOnRoute.properties.index) {
           newNextWpIndex++;
         }
         if (newNextWpIndex > nextWpIndex) {
-          // TODO dispatch update
           console.log(`New WP update from ${nextWpIndex} to ${newNextWpIndex}`);
           this.store.dispatch(new SetNextWaypointIndexAction({ nextWaypointIndex: newNextWpIndex }));
         }
-        // Calculate distance to next way point
+
+        const lineToNextWp = lineSlice(point([currentPosition.latitude, currentPosition.longitude]),
+          point(routeDetails.routeLegs[nextWpIndex].coords),
+          lineString(routePoints));
+        const distanceToNextWp = length(lineToNextWp) * 1000;
+        this.store.dispatch(new SetNextWaypointDistanceAction({ nextWaypointDistance: distanceToNextWp }));
+        // console.log('distance to next wp: ' + distanceToNextWp);
       })
     ).subscribe();
   }

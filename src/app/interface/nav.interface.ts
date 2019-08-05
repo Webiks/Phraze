@@ -6,6 +6,7 @@ export interface NavInterface {
   currentPosition: GeoPosition;
   nextWaypointIndex: number;
   nextWaypointDistance: number;
+  distanceToEndpoint: number;
 }
 
 export interface RouteDetails {

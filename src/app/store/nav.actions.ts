@@ -8,7 +8,8 @@ export enum navActionTypes {
   SET_SHOW_SEARCH = 'SET SHOW SEARCH',
   SET_CURRENT_POSITION = 'SET CURRENT POSITION',
   SET_NEXT_WAYPOINT_INDEX = 'SET NEXT WAYPOINT INDEX',
-  SET_NEXT_WAYPOINT_DISTANCE = 'SET NEXT WAYPOINT DISTANCE'
+  SET_NEXT_WAYPOINT_DISTANCE = 'SET NEXT WAYPOINT DISTANCE',
+  SET_DISTANCE_TO_ENDPOINT = 'SET DISTANCE TO ENDPOINT'
 }
 
 export interface SetRoutePayload {routeDetails: RouteDetails; }
@@ -53,9 +54,17 @@ export class SetNextWaypointDistanceAction implements Action {
   }
 }
 
+export interface SetDistanceToEndpointPayload {distanceToEndpoint: number; }
+export class SetDistanceToEndpointAction implements Action {
+  type = navActionTypes.SET_DISTANCE_TO_ENDPOINT;
+  constructor(public payload: SetDistanceToEndpointPayload) {
+  }
+}
+
 export type NavActions =  SetRouteAction |
                           SetPhrazeStateAction |
                           SetShowSearchAction |
                           SetCurrentPositionAction |
                           SetNextWaypointIndexAction |
-                          SetNextWaypointDistanceAction;
+                          SetNextWaypointDistanceAction |
+                          SetDistanceToEndpointAction;
