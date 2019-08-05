@@ -16,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { navFeatureKey } from './store/nav.selectors';
 import { navReducer } from './store/nav.reducer';
 import { FormsModule } from '@angular/forms';
+import { InstructionsDisplayComponent } from './components/instructions-display/instructions-display.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     ControlBarComponent,
     SearchPageComponent,
+    InstructionsDisplayComponent,
 
   ],
   imports: [

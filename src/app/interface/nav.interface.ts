@@ -7,6 +7,8 @@ export interface NavInterface {
   nextWaypointIndex: number;
   nextWaypointDistance: number;
   distanceToEndpoint: number;
+  nextWaypointManeuverType: string;
+  nextWaypointName: string;
 }
 
 export interface RouteDetails {
@@ -18,8 +20,10 @@ export interface RouteDetails {
 
 export interface LegDetails {
   index: number;
-  coords: [];
+  coords: Array<number>;
   text: string;
+  maneuverType: string;
+  name: string;
 }
 
 export enum PhrazeState {

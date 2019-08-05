@@ -23,9 +23,8 @@ export class PositionDisplayComponent implements OnInit, AfterViewInit {
 
     this.postionUpdate$ = this.store.pipe(select(currentPositionSelector),
       combineLatest(this.store.pipe(select(phrazeStateSelector))),
-      map(data => ({ position: data[0], phrazeState: data[1] })),
-      filter(({ position, phrazeState }) => position.latitude !== null && phrazeState !== PhrazeState.PREVIEW),
-      map(({ position }) => position),
+      filter(([ position, phrazeState ]) => position.latitude !== null && phrazeState !== PhrazeState.PREVIEW),
+      map(([ position ]) => position),
       tap(position => this.flyToPosition(position)),
       map(position => {
         return {

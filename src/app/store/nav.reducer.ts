@@ -14,14 +14,16 @@ export const NavState: NavInterface = {
     routePoints: null,
     routeDuration: null,
     routeLength: null,
-    routeLegs: [{ coords: null, index: null, text: null }]
+    routeLegs: [{ coords: null, index: null, text: null, maneuverType: null, name: null }]
   },
   phrazeState: PhrazeState.IDLE,
   isShowSearch: false,
   currentPosition: { latitude: null, longitude: null },
   nextWaypointIndex: null,
   nextWaypointDistance: null,
-  distanceToEndpoint: null
+  distanceToEndpoint: null,
+  nextWaypointManeuverType: null,
+  nextWaypointName: null
 };
 
 export function navReducer(state = NavState, action: NavActions): NavInterface {

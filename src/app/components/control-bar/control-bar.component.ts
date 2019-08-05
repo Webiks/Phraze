@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { SetNextWaypointIndexAction, SetPhrazeStateAction, SetShowSearchAction } from '../../store/nav.actions';
-import { routePointsSelector } from '../../store/nav.selectors';
+import { distanceToEndpointSelector, routePointsSelector } from '../../store/nav.selectors';
 import { tap } from 'rxjs/operators';
 import { PhrazeState } from '../../interface/nav.interface';
 
@@ -12,9 +12,13 @@ import { PhrazeState } from '../../interface/nav.interface';
 })
 export class ControlBarComponent implements OnInit {
 
+  distanceToEndpoint$;
+
   constructor(private store: Store<any>) { }
 
   ngOnInit() {
+    this.distanceToEndpoint$ = this.store.pipe(select(distanceToEndpointSelector),
+        tap((x) => console.log(x)));
   }
 
   openSearchPage() {

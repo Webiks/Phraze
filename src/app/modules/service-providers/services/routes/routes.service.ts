@@ -21,6 +21,13 @@ export class RoutesService {
         currentLeg.text = leg.instruction.text;
         currentLeg.coords = leg.maneuverPoint.coordinates;
         currentLeg.index = 0;
+        currentLeg.maneuverType = leg.details[0].maneuverType;
+        console.log(currentLeg.maneuverType);
+        // if (leg.details[0].names[0] !== undefined) {
+        //   currentLeg.name = leg.details[0].names[0];
+        //   console.log(currentLeg.name);
+        // }
+
         mapedLegs.push(currentLeg);
       });
       return mapedLegs;
