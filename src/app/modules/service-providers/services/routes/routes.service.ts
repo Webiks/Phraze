@@ -4,7 +4,7 @@ import { BingProviderInterface } from '../../interface/bingProvider.interface';
 import { Observable, Subject } from 'rxjs';
 import axios from 'axios';
 import { LegDetails, RouteDetails } from '../../../../interface/nav.interface';
-import {nearestPointOnLine, lineString, point} from '@turf/turf';
+import {nearestPointOnLine, lineString, point, length} from '@turf/turf';
 
 @Injectable({
   providedIn: 'root'
@@ -62,7 +62,7 @@ export class RoutesService {
       try {
         const routeBase = result.data.resourceSets[0].resources[0];
         routeDetails.routePoints = routeBase.routePath.line.coordinates;
-        routeDetails.routeLength = routeBase.travelDistance * 1000;
+        routeDetails.routeLength = length(lineString(routeDetails.routePoints)) * 1000;
         routeDetails.routeDuration = routeBase.travelDuration;
         routeDetails.routeLegs = mapLegs(routeBase.routeLegs[0].itineraryItems);
         routeDetails.routeLegs = indexLegs(routeDetails.routeLegs, routeDetails.routePoints);

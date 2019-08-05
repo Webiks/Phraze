@@ -35,7 +35,6 @@ export class NavigationService {
           distanceToEndpoint:
             (routeDetails.routeLength - (currentPositionOnRoute.properties.location * 1000))
         }));
-        console.log('remaining distance: ' + (routeDetails.routeLength - (currentPositionOnRoute.properties.location * 1000)));
         let newNextWpIndex = nextWpIndex;
         while (newNextWpIndex < routeDetails.routeLegs.length - 1 &&
         routeDetails.routeLegs[newNextWpIndex].index <= currentPositionOnRoute.properties.index) {
