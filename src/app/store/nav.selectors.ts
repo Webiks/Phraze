@@ -11,6 +11,4 @@ export const currentPositionSelector = createSelector(getNavState, (state: NavIn
 export const nextWaypointIndexSelector = createSelector(getNavState, (state: NavInterface) => state.nextWaypointIndex);
 export const nextWaypointDistanceSelector = createSelector(getNavState, (state: NavInterface) => state.nextWaypointDistance);
 export const distanceToEndpointSelector = createSelector(getNavState, (state: NavInterface) => state.distanceToEndpoint);
-export const nextWaypointManeuverTypeSelector = createSelector(getNavState, (state: NavInterface) => state.nextWaypointManeuverType);
-export const nextWaypointNameSelector = createSelector(getNavState, (state: NavInterface) => state.nextWaypointName);
 export const navFeatureKey = 'nav';

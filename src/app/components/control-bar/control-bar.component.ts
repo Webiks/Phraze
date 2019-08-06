@@ -17,8 +17,7 @@ export class ControlBarComponent implements OnInit {
   constructor(private store: Store<any>) { }
 
   ngOnInit() {
-    this.distanceToEndpoint$ = this.store.pipe(select(distanceToEndpointSelector),
-        tap((x) => console.log(x)));
+    this.distanceToEndpoint$ = this.store.pipe(select(distanceToEndpointSelector));
   }
 
   openSearchPage() {

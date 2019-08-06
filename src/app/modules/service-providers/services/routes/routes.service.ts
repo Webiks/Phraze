@@ -22,12 +22,8 @@ export class RoutesService {
         currentLeg.coords = leg.maneuverPoint.coordinates;
         currentLeg.index = 0;
         currentLeg.maneuverType = leg.details[0].maneuverType;
-        console.log(currentLeg.maneuverType);
-        // if (leg.details[0].names[0] !== undefined) {
-        //   currentLeg.name = leg.details[0].names[0];
-        //   console.log(currentLeg.name);
-        // }
-
+        const legDetails = leg.details[0];
+        currentLeg.name = (legDetails.names && legDetails.names[0]) || (leg.signs && leg.signs[0]) || '???';
         mapedLegs.push(currentLeg);
       });
       return mapedLegs;

@@ -21,9 +21,7 @@ export const NavState: NavInterface = {
   currentPosition: { latitude: null, longitude: null },
   nextWaypointIndex: null,
   nextWaypointDistance: null,
-  distanceToEndpoint: null,
-  nextWaypointManeuverType: null,
-  nextWaypointName: null
+  distanceToEndpoint: null
 };
 
 export function navReducer(state = NavState, action: NavActions): NavInterface {

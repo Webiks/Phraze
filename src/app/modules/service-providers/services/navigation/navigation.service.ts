@@ -41,7 +41,6 @@ export class NavigationService {
           newNextWpIndex++;
         }
         if (newNextWpIndex > nextWpIndex) {
-          console.log(`New WP update from ${nextWpIndex} to ${newNextWpIndex}`);
           this.store.dispatch(new SetNextWaypointIndexAction({ nextWaypointIndex: newNextWpIndex }));
         }
 
@@ -50,7 +49,7 @@ export class NavigationService {
           lineString(routePoints));
         const distanceToNextWp = length(lineToNextWp) * 1000;
         this.store.dispatch(new SetNextWaypointDistanceAction({ nextWaypointDistance: distanceToNextWp }));
-        // console.log('distance to next wp: ' + distanceToNextWp);
+
       })
     ).subscribe();
   }

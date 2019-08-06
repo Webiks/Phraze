@@ -7,8 +7,7 @@ export interface NavInterface {
   nextWaypointIndex: number;
   nextWaypointDistance: number;
   distanceToEndpoint: number;
-  nextWaypointManeuverType: string;
-  nextWaypointName: string;
+
 }
 
 export interface RouteDetails {
