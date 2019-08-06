@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { lineSlice, lineString, nearestPointOnLine, point, length } from '@turf/turf';
 import {
-  currentPositionSelector,
+  currentPositionSelector, getNavState,
   nextWaypointIndexSelector,
   routeDetailsSelector,
   routePointsSelector
@@ -50,7 +50,31 @@ export class NavigationService {
           lineString(routePoints));
         const distanceToNextWp = length(lineToNextWp) * 1000;
         this.store.dispatch(new SetNextWaypointDistanceAction({ nextWaypointDistance: distanceToNextWp }));
-
+      }),
+      withLatestFrom(this.store.pipe(select(getNavState))),
+      filter(([[[currentPosition, routePoints], nextWpIndex, routeDetails], stateData]) => stateData.previousPosition !== null &&
+        !stateData.isNextWpNotified ),
+      tap(([[[currentPosition, routePoints], nextWpIndex, routeDetails], stateData]) => {
+        const currentPositionOnRoute = nearestPointOnLine(lineString(routePoints), point([currentPosition.latitude,
+          currentPosition.longitude
+        ]));
+        const previousPositionOnRoute = nearestPointOnLine(lineString(routePoints), point([stateData.previousPosition.latitude,
+        stateData.previousPosition.longitude]));
+        const lineBetweenPositions = lineSlice(point([currentPositionOnRoute.geometry.coordinates[0],
+          currentPositionOnRoute.geometry.coordinates[1]]),
+          point([previousPositionOnRoute.geometry.coordinates[0],
+            previousPositionOnRoute.geometry.coordinates[1]]),
+          lineString(routePoints));
+        const currentDistance = length(lineBetweenPositions) * 1000;
+        const timeBetweenPositions = (stateData.currentPositionTimeStamp - stateData.previousPositionTimeStamp) / 1000;
+        // console.log(timeBetweenPositions + 'time between positions');
+        // console.log(currentDistance + ' distance between positions');
+        const speed = currentDistance / timeBetweenPositions;
+        // console.log(speed + ' this is the speed');
+        const preNotificationDistance = (speed * 3) + 200;
+        if (stateData.nextWaypointDistance <= preNotificationDistance) {
+          console.log('notification for leg # ' + nextWpIndex);
+        }
       })
     ).subscribe();
   }
