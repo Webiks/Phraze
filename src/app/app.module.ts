@@ -17,6 +17,7 @@ import { navFeatureKey } from './store/nav.selectors';
 import { navReducer } from './store/nav.reducer';
 import { FormsModule } from '@angular/forms';
 import { InstructionsDisplayComponent } from './components/instructions-display/instructions-display.component';
+import { InstructionsVoiceComponent } from './components/instructions-voice/instructions-voice.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { InstructionsDisplayComponent } from './components/instructions-display/
     ControlBarComponent,
     SearchPageComponent,
     InstructionsDisplayComponent,
+    InstructionsVoiceComponent,
 
   ],
   imports: [
