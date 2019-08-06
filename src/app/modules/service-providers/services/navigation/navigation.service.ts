@@ -44,7 +44,8 @@ export class NavigationService {
           this.store.dispatch(new SetNextWaypointIndexAction({ nextWaypointIndex: newNextWpIndex }));
         }
 
-        const lineToNextWp = lineSlice(point([currentPosition.latitude, currentPosition.longitude]),
+        const lineToNextWp = lineSlice(point([currentPositionOnRoute.geometry.coordinates[0],
+            currentPositionOnRoute.geometry.coordinates[1]]),
           point(routeDetails.routeLegs[nextWpIndex].coords),
           lineString(routePoints));
         const distanceToNextWp = length(lineToNextWp) * 1000;
