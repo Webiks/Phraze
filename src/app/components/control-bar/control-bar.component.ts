@@ -49,7 +49,7 @@ export class ControlBarComponent implements OnInit {
       window.removeEventListener('message', handleGetRouteCallback);
       window.postMessage({
           type: 'playRoute',
-          playbackRate: 1.5
+          playbackRate: 0.28
         },
         '*');
     }

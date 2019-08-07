@@ -16,12 +16,10 @@ export class InstructionsVoiceComponent implements OnInit {
     ofType(navActionTypes.PLAY_VOICE_WP_NOTIFICATION),
     withLatestFrom(this.store.pipe(select(getNavState))),
     tap(([playVoiceAction, stateData]) => {
-      console.log(Math.round(stateData.nextWaypointDistance));
-      const texter = `in ${Math.round(stateData.nextWaypointDistance)} meters
-       ${stateData.routeDetails.routeLegs[stateData.nextWaypointIndex].maneuverType} to  
-      ${stateData.routeDetails.routeLegs[stateData.nextWaypointIndex].name}`;
-      console.log(texter);
-      this.speak(texter);
+      const instructionText = `in ${(<any>playVoiceAction).payload.distanceNotification} meters
+       ${stateData.routeDetails.routeLegs[stateData.nextWaypointIndex].maneuverType} to
+       ${stateData.routeDetails.routeLegs[stateData.nextWaypointIndex].name}`;
+      this.speak(instructionText);
     })
   ).subscribe();
 
@@ -35,8 +33,8 @@ export class InstructionsVoiceComponent implements OnInit {
   speak(text) {
     const msg = new SpeechSynthesisUtterance();
     msg.text = text;
-    msg.volume = 70;
-
+    msg.volume = 100;
+    msg.rate = 1.7;
     window.speechSynthesis.speak(msg);
   }
 

@@ -70,9 +70,11 @@ export class SetIsNextWpNotifiedAction implements Action {
   }
 }
 
-// export interface PlayVoiceWpNotificationPayload { }
+export interface PlayVoiceWpNotificationPayload {distanceNotification: number; }
 export class PlayVoiceWpNotificationAction implements Action {
   type = navActionTypes.PLAY_VOICE_WP_NOTIFICATION;
+  constructor(public payload: PlayVoiceWpNotificationPayload) {
+  }
 }
 
 export type NavActions =  SetRouteAction |
