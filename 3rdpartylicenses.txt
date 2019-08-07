@@ -1562,6 +1562,9 @@ MIT
 
 @angular/material/sidenav
 
+@ngrx/effects
+MIT
+
 @angular/forms
 MIT
 
