@@ -2,7 +2,11 @@ import { NavInterface, PhrazeState } from '../interface/nav.interface';
 import {
   NavActions,
   navActionTypes,
-  SetCurrentPositionAction, SetDistanceToEndpointAction, SetNextWaypointDistanceAction, SetNextWaypointIndexAction,
+  SetCurrentPositionAction,
+  SetDistanceToEndpointAction,
+  SetIsNextWpNotifiedAction,
+  SetNextWaypointDistanceAction,
+  SetNextWaypointIndexAction,
   SetPhrazeStateAction,
   SetRouteAction,
   SetShowSearchAction
@@ -60,6 +64,10 @@ export function navReducer(state = NavState, action: NavActions): NavInterface {
     case navActionTypes.SET_DISTANCE_TO_ENDPOINT: {
       const distanceToEndpoint = (action as SetDistanceToEndpointAction).payload.distanceToEndpoint;
       return { ...state, distanceToEndpoint: distanceToEndpoint };
+    }
+    case navActionTypes.SET_IS_NEXT_WP_NOTIFIED: {
+      const isNextWpNotified = (action as SetIsNextWpNotifiedAction).payload.isNextWpNotified;
+      return {...state, isNextWpNotified };
     }
     default:
       return state;
