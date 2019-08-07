@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { GeocodingService } from '../../modules/service-providers/services/geocoding/geocoding.service';
 import { RoutesService } from '../../modules/service-providers/services/routes/routes.service';
-import { GeolocationService } from '../../modules/service-providers/services/position/geolocation.service';
 import { select, Store } from '@ngrx/store';
-import { SetActiveNavAction, SetRouteAction, SetShowSearchAction } from '../../store/nav.actions';
-import { routeSelector, getShowSearchSelector, routePointSelector } from '../../store/nav.selectors';
+import { SetPhrazeStateAction, SetRouteAction, SetShowSearchAction } from '../../store/nav.actions';
+import { currentPositionSelector, getShowSearchSelector, routePointsSelector } from '../../store/nav.selectors';
+import { PhrazeState } from '../../interface/nav.interface';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-page',
@@ -15,17 +16,15 @@ export class SearchPageComponent implements OnInit {
 
   searchResults;
   routePoints$;
-  currentPosition;
   isShowSearch$;
   searchAddress = 'בן יהודה 5 ';
 
 
   constructor(private store: Store<any>,
               private geocodingService: GeocodingService,
-              private routesService: RoutesService,
-              private geolocationService: GeolocationService) {
+              private routesService: RoutesService) {
     this.routePoints$ = this.store.pipe(
-      select(routePointSelector)
+      select(routePointsSelector)
     );
     this.isShowSearch$ = this.store.pipe(
       select(getShowSearchSelector)
@@ -43,15 +42,19 @@ export class SearchPageComponent implements OnInit {
   }
 
   selectDestination(entry) {
-    this.currentPosition = this.geolocationService.lastPos.coords;
-    this.calcRoute(this.currentPosition, entry.coords);
-    this.closeSearchPage();
-    this.store.dispatch(new SetActiveNavAction({isActiveNav: false}));
+    this.store.pipe(
+      select(currentPositionSelector),
+      take(1),
+      tap(currentPosition => {
+        this.calcRoute(currentPosition, entry.coords);
+        this.closeSearchPage();
+        this.store.dispatch(new SetPhrazeStateAction({phrazeState: PhrazeState.PREVIEW}));
+      })
+    ).subscribe();
   }
 
   calcRoute(from, to) {
     this.routesService.getRoute(from, to).subscribe(data => {
-      console.log(data);
       this.store.dispatch(new SetRouteAction(data));
     });
   }

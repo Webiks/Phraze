@@ -1,8 +1,16 @@
 
 export interface NavInterface {
   routeDetails: RouteDetails;
-  isActiveNav: boolean;
+  phrazeState: PhrazeState;
   isShowSearch: boolean;
+  currentPosition: GeoPosition;
+  nextWaypointIndex: number;
+  nextWaypointDistance: number;
+  isNextWpNotified: boolean;
+  distanceToEndpoint: number;
+  previousPosition: GeoPosition;
+  previousPositionTimeStamp: number;
+  currentPositionTimeStamp: number;
 }
 
 export interface RouteDetails {
@@ -14,7 +22,21 @@ export interface RouteDetails {
 
 export interface LegDetails {
   index: number;
-  coords: [];
+  coords: Array<number>;
   text: string;
+  maneuverType: string;
+  name: string;
 }
+
+export enum PhrazeState {
+  IDLE = 'IDLE',
+  PREVIEW = 'PREVIEW',
+  NAVIGATION = 'NAVIGATION'
+}
+
+export interface GeoPosition {
+  latitude: number;
+  longitude: number;
+}
+
 

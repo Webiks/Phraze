@@ -1,4 +1,14 @@
 .controlBarContainer {
-  height: 30px;
   display: flex;
+}
+.remaining-distance-display-container {
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  position: relative;
+}
+
+.remain-span {
+  position: absolute;
+  top: 50%;
 }

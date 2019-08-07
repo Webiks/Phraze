@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { GeolocationService } from './modules/service-providers/services/position/geolocation.service';
+import { NavigationService } from './modules/service-providers/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Phraze';
+
+  constructor(private geolocationService: GeolocationService,
+              private navigationService: NavigationService) {}
 }

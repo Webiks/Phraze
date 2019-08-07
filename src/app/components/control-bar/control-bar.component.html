@@ -5,4 +5,8 @@
   <div class="settingsButtonContainer">
     <button mat-raised-button (click)="startNavigation()">Start</button>
   </div>
+  <div class="remaining-distance-display-container">
+    <span class="remain-span">{{distanceToEndpoint$ | async}} </span>
+  </div>
+
 </div>

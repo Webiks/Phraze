@@ -16,6 +16,9 @@ import { StoreModule } from '@ngrx/store';
 import { navFeatureKey } from './store/nav.selectors';
 import { navReducer } from './store/nav.reducer';
 import { FormsModule } from '@angular/forms';
+import { InstructionsDisplayComponent } from './components/instructions-display/instructions-display.component';
+import { InstructionsVoiceComponent } from './components/instructions-voice/instructions-voice.component';
+import { EffectsModule } from '@ngrx/effects';
 
 
 @NgModule({
@@ -23,6 +26,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     ControlBarComponent,
     SearchPageComponent,
+    InstructionsDisplayComponent,
+    InstructionsVoiceComponent,
 
   ],
   imports: [
@@ -36,6 +41,7 @@ import { FormsModule } from '@angular/forms';
     ServiceProvidersModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature(navFeatureKey, navReducer),
+    EffectsModule.forRoot([]),
     MatToolbarModule,
     MatSidenavModule,
     FormsModule,

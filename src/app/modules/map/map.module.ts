@@ -6,12 +6,14 @@ import { PositionDisplayComponent } from './components/position-display/position
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material';
 import { RouteDisplayComponent } from './components/route-display/route-display.component';
+import { NextWpDisplayComponent } from './components/next-wp-display/next-wp-display.component';
 
 @NgModule({
   declarations: [
     MapComponent,
     PositionDisplayComponent,
-    RouteDisplayComponent
+    RouteDisplayComponent,
+    NextWpDisplayComponent
   ],
   imports: [
     CommonModule,

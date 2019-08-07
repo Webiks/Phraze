@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { SetActiveNavAction, SetShowSearchAction } from '../../store/nav.actions';
-import { routePointSelector, routeSelector } from '../../store/nav.selectors';
+import { SetNextWaypointIndexAction, SetPhrazeStateAction, SetShowSearchAction } from '../../store/nav.actions';
+import { distanceToEndpointSelector, routePointsSelector } from '../../store/nav.selectors';
 import { tap } from 'rxjs/operators';
+import { PhrazeState } from '../../interface/nav.interface';
 
 @Component({
   selector: 'app-control-bar',
@@ -11,9 +12,12 @@ import { tap } from 'rxjs/operators';
 })
 export class ControlBarComponent implements OnInit {
 
+  distanceToEndpoint$;
+
   constructor(private store: Store<any>) { }
 
   ngOnInit() {
+    this.distanceToEndpoint$ = this.store.pipe(select(distanceToEndpointSelector));
   }
 
   openSearchPage() {
@@ -21,9 +25,10 @@ export class ControlBarComponent implements OnInit {
   }
 
   startNavigation() {
-    this.store.dispatch(new SetActiveNavAction({isActiveNav: true}));
+    this.store.dispatch(new SetPhrazeStateAction({phrazeState: PhrazeState.NAVIGATION}));
+    this.store.dispatch(new SetNextWaypointIndexAction({nextWaypointIndex: 1}));
     this.store.pipe(
-      select(routePointSelector),
+      select(routePointsSelector),
       tap(route => {
         const from = <any>route[0];
         const to = <any>route[route.length - 1];
@@ -44,7 +49,7 @@ export class ControlBarComponent implements OnInit {
       window.removeEventListener('message', handleGetRouteCallback);
       window.postMessage({
           type: 'playRoute',
-          playbackRate: 1.5
+          playbackRate: 0.28
         },
         '*');
     }
