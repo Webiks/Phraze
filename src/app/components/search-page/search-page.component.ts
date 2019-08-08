@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GeocodingService } from '../../modules/service-providers/services/geocoding/geocoding.service';
 import { RoutesService } from '../../modules/service-providers/services/routes/routes.service';
 import { select, Store } from '@ngrx/store';
-import { SetPhrazeStateAction, SetRouteAction, SetShowSearchAction } from '../../store/nav.actions';
+import { SetPhrazeStateAction, SetRouteAction, SetShowRouteSummaryAction, SetShowSearchAction } from '../../store/nav.actions';
 import { currentPositionSelector, getShowSearchSelector, routePointsSelector } from '../../store/nav.selectors';
 import { PhrazeState } from '../../interface/nav.interface';
 import { take, tap } from 'rxjs/operators';
@@ -49,6 +49,7 @@ export class SearchPageComponent implements OnInit {
         this.calcRoute(currentPosition, entry.coords);
         this.closeSearchPage();
         this.store.dispatch(new SetPhrazeStateAction({phrazeState: PhrazeState.PREVIEW}));
+        this.store.dispatch(new SetShowRouteSummaryAction({isShowRouteSummary: true}));
       })
     ).subscribe();
   }

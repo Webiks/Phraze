@@ -1,0 +1,31 @@
+.route-summary-container {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(105,105,105, 0.8);
+  z-index: 100;
+  border-radius: 7px;
+}
+
+.route-summary-header {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 6px;
+}
+
+.route-summary-body {
+  padding: 8px;
+  color: #f0f0f0;
+  font-size: x-large;
+  display: flex;
+  flex-direction: column;
+}
+
+.route-summary-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 8px;
+}

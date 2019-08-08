@@ -6,6 +6,7 @@ export enum navActionTypes {
   SET_ROUTE = 'SET ROUTE',
   SET_PHRAZE_STATE = 'SET PHRAZE STATE',
   SET_SHOW_SEARCH = 'SET SHOW SEARCH',
+  SET_SHOW_ROUTE_SUMMARY = 'SET SHOW ROUTE SUMMARY',
   SET_CURRENT_POSITION = 'SET CURRENT POSITION',
   SET_NEXT_WAYPOINT_INDEX = 'SET NEXT WAYPOINT INDEX',
   SET_NEXT_WAYPOINT_DISTANCE = 'SET NEXT WAYPOINT DISTANCE',
@@ -32,6 +33,13 @@ export interface SetShowSearchPayload { isShowSearch: boolean; }
 export class SetShowSearchAction implements Action {
   type = navActionTypes.SET_SHOW_SEARCH;
   constructor(public payload: SetShowSearchPayload) {
+  }
+}
+
+export interface SetShowRouteSummaryPayload { isShowRouteSummary: boolean; }
+export class SetShowRouteSummaryAction implements Action {
+  type = navActionTypes.SET_SHOW_ROUTE_SUMMARY;
+  constructor(public payload: SetShowRouteSummaryPayload) {
   }
 }
 
@@ -80,6 +88,7 @@ export class PlayVoiceWpNotificationAction implements Action {
 export type NavActions =  SetRouteAction |
                           SetPhrazeStateAction |
                           SetShowSearchAction |
+                          SetShowRouteSummaryAction |
                           SetCurrentPositionAction |
                           SetNextWaypointIndexAction |
                           SetNextWaypointDistanceAction |

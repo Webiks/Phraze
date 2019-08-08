@@ -14,10 +14,12 @@ export class ControlBarComponent implements OnInit {
 
   distanceToEndpoint$;
 
-  constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>) {
+    this.distanceToEndpoint$ = this.store.pipe(select(distanceToEndpointSelector));
+  }
 
   ngOnInit() {
-    this.distanceToEndpoint$ = this.store.pipe(select(distanceToEndpointSelector));
+
   }
 
   openSearchPage() {

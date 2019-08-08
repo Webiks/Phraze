@@ -1,0 +1,14 @@
+<div class="route-summary-container" *ngIf="isShowRouteSummary$ | async">
+  <div class="route-summary-header">
+        <span class="x-search-button"><img src="./assets/images/close.svg" (click)="closeRouteSummary()"
+                                           width="24" height="24" alt="close"></span>
+  </div>
+  <div class="route-summary-body">
+    <span class="remain-span">Route total distance: {{routeLength$}} meters </span>
+    <span class="remain-span">Route total time: {{routeDuration$}} </span>
+  </div>
+  <div class="route-summary-controls">
+    <button mat-raised-button (click)="startNavigation()">Start</button>
+    <button mat-raised-button (click)="startNavigation()">Cancel</button>
+  </div>
+</div>

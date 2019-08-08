@@ -77,20 +77,12 @@ export class NavigationService {
           lineString(routePoints));
         const currentDistance = length(lineBetweenPositions) * 1000;
         const timeBetweenPositions = (stateData.currentPositionTimeStamp - stateData.previousPositionTimeStamp) / 1000;
-        // console.log(timeBetweenPositions + 'time between positions');
-        // console.log(currentDistance + ' distance between positions');
         const speed = currentDistance / timeBetweenPositions;
         const playTime = 4;
         const preManeuverDistance = 200;
-        // console.log(speed + ' this is the speed');
         const preNotificationDistance = (speed * playTime) + preManeuverDistance;
-        // console.log(`prenotification distance is ${preNotificationDistance}`);
         if (stateData.nextWaypointDistance <= preNotificationDistance) {
           const distanceNotification = Math.min(preManeuverDistance, stateData.nextWaypointDistance);
-
-
-          // console.log('notification for leg # ' + nextWpIndex);
-          // console.log(`distance to next waypoint: ${stateData.nextWaypointDistance}`);
           this.store.dispatch(new SetIsNextWpNotifiedAction({ isNextWpNotified: true }));
           this.store.dispatch(new PlayVoiceWpNotificationAction({distanceNotification}));
         }

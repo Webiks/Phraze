@@ -3,6 +3,7 @@ export interface NavInterface {
   routeDetails: RouteDetails;
   phrazeState: PhrazeState;
   isShowSearch: boolean;
+  isShowRouteSummary: boolean;
   currentPosition: GeoPosition;
   nextWaypointIndex: number;
   nextWaypointDistance: number;
