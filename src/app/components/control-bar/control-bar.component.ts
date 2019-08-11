@@ -25,39 +25,4 @@ export class ControlBarComponent implements OnInit {
   openSearchPage() {
     this.store.dispatch(new SetShowSearchAction({isShowSearch: true}));
   }
-
-  startNavigation() {
-    this.store.dispatch(new SetPhrazeStateAction({phrazeState: PhrazeState.NAVIGATION}));
-    this.store.dispatch(new SetNextWaypointIndexAction({nextWaypointIndex: 1}));
-    this.store.pipe(
-      select(routePointsSelector),
-      tap(route => {
-        const from = <any>route[0];
-        const to = <any>route[route.length - 1];
-        window.addEventListener('message', handleGetRouteCallback);
-        window.postMessage({
-            type: 'getRoute',
-            from: `${from[0]},${from[1]}`,
-            to: `${to[0]},${to[1]}`
-          },
-          '*');
-      })
-    ).subscribe();
-
-    function handleGetRouteCallback(event) {
-      if (!event || !event.data || event.data.type !== 'getRouteCallback') {
-        return;
-      }
-      window.removeEventListener('message', handleGetRouteCallback);
-      window.postMessage({
-          type: 'playRoute',
-          playbackRate: 0.28
-        },
-        '*');
-    }
-
-
-
-  }
-
 }

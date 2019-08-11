@@ -14,6 +14,7 @@ import { ActionType } from 'angular-cesium';
 export class NextWpDisplayComponent implements OnInit {
 
   nextWpUpdate$: Observable<any>;
+  pinBuilder = new Cesium.PinBuilder();
 
   constructor(private store: Store<any>) {
     this.nextWpUpdate$  = this.store.pipe(
@@ -27,7 +28,9 @@ export class NextWpDisplayComponent implements OnInit {
           id: 'nextWayPoint',
           entity: {
             id: 'nextWayPoint',
-            position: Cesium.Cartesian3.fromDegrees(coords[1], coords[0], 10.0 )
+            position: Cesium.Cartesian3.fromDegrees(coords[1], coords[0], 10.0 ),
+            image: this.pinBuilder.fromText('WP', Cesium.Color.BLACK, 48).toDataURL(),
+            verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
           },
           actionType: ActionType.ADD_UPDATE
         };
