@@ -18,11 +18,15 @@ export class MapComponent implements OnInit {
     'CI6NjU0Miwic2NvcGVzIjpbImFzbCIsImFzciIsImFzdyIsImdjIl0sImFzc2V0cyI6WzIsM10sImlhdCI6MTU1MTM0NzUzNH0.iLuDmwFBzHKNiEIoYBakVCiwNS' +
     '1xZyen-2GJAZ9fjJk';
 
-  providerOptions = {
+  bingProviderOptions = {
     url: 'https://dev.virtualearth.net',
     key: 'AmJ0O28GqMP3Dh1xqajFAFMuKb9f0YCXtGWJ5G4NU_PeE899SYup3ngALmDschnu',
     DEFAULT_VIEW_FACTOR: 0,
+  };
 
+  mapBoxProviderOptions = {
+    url: 'https://api.mapbox.com/styles/v1/idanbarak/cj5s5klwq3e6s2rph9rke05gm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaWR' +
+      'hbmJhcmFrIiwiYSI6ImNpdmptNWVrZzAwOTkydGw1NmIxcHM2ZnoifQ.FZxE5OXjfpd6I3fuimotRw'
   };
 
   viewerConfigurationOptions = {
