@@ -43,7 +43,7 @@ export class SetShowRouteSummaryAction implements Action {
   }
 }
 
-export interface SetCurrentPositionPayload {currentPosition: {latitude: number, longitude: number}; }
+export interface SetCurrentPositionPayload {currentPosition: {latitude: number, longitude: number}; heading: number; }
 export class SetCurrentPositionAction implements Action {
   type = navActionTypes.SET_CURRENT_POSITION;
   constructor(public payload: SetCurrentPositionPayload) {

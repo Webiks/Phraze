@@ -3,7 +3,7 @@ import { ActionType, MapsManagerService } from 'angular-cesium';
 import { Observable } from 'rxjs';
 import { combineLatest, filter, map, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { currentPositionSelector, phrazeStateSelector } from '../../../../store/nav.selectors';
+import { currentPositionHeadingSelector, currentPositionSelector, phrazeStateSelector } from '../../../../store/nav.selectors';
 import { GeoPosition, PhrazeState } from '../../../../interface/nav.interface';
 
 @Component({
@@ -22,11 +22,10 @@ export class PositionDisplayComponent implements OnInit, AfterViewInit {
   ) {
 
     this.postionUpdate$ = this.store.pipe(select(currentPositionSelector),
-      combineLatest(this.store.pipe(select(phrazeStateSelector))),
-      filter(([ position, phrazeState ]) => position.latitude !== null && phrazeState !== PhrazeState.PREVIEW),
-      map(([ position ]) => position),
-      tap(position => this.flyToPosition(position)),
-      map(position => {
+      combineLatest(this.store.pipe(select(phrazeStateSelector)), this.store.pipe(select(currentPositionHeadingSelector))),
+      filter(([ position, phrazeState, heading ]) => position.latitude !== null && phrazeState !== PhrazeState.PREVIEW),
+      tap(([ position, state, heading ]) => this.flyToPosition(position, heading)),
+      map(([ position ]) => {
         return {
           id: 'currentPosition',
           entity: {
@@ -40,11 +39,16 @@ export class PositionDisplayComponent implements OnInit, AfterViewInit {
     this.postionUpdate$.subscribe(); // TODO unsubscribe
   }
 
-  flyToPosition(position: GeoPosition) {
-    this.viewer.camera.setView({
-        destination: Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude, 1000.0)
-      }
-    );
+  flyToPosition(position: GeoPosition, heading: number) {
+    if (heading === undefined) {
+      heading = 0;
+    }
+    const entityPosition = Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude);
+    const cameraHeading = Cesium.Math.toRadians(heading);
+    const pitch = Cesium.Math.toRadians(-30);
+    const range = 500;
+    const cameraOrientation = new Cesium.HeadingPitchRange(cameraHeading, pitch, range);
+    this.viewer.camera.lookAt(entityPosition, cameraOrientation);
   }
 
   ngOnInit() {

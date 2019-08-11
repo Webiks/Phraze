@@ -9,6 +9,7 @@ export const getShowSearchSelector = createSelector(getNavState, (state: NavInte
 export const showRouteSummarySelector = createSelector(getNavState, (state: NavInterface) => state.isShowRouteSummary);
 export const phrazeStateSelector = createSelector(getNavState, (state: NavInterface) => state.phrazeState);
 export const currentPositionSelector = createSelector(getNavState, (state: NavInterface) => state.currentPosition);
+export const currentPositionHeadingSelector = createSelector(getNavState, (state: NavInterface) => state.currentPositionHeading);
 export const nextWaypointIndexSelector = createSelector(getNavState, (state: NavInterface) => state.nextWaypointIndex);
 export const nextWaypointDistanceSelector = createSelector(getNavState, (state: NavInterface) => state.nextWaypointDistance);
 export const distanceToEndpointSelector = createSelector(getNavState, (state: NavInterface) => state.distanceToEndpoint);

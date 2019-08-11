@@ -12,6 +12,7 @@ export interface NavInterface {
   previousPosition: GeoPosition;
   previousPositionTimeStamp: number;
   currentPositionTimeStamp: number;
+  currentPositionHeading: number;
 }
 
 export interface RouteDetails {

@@ -30,7 +30,8 @@ export const NavState: NavInterface = {
   distanceToEndpoint: null,
   previousPosition: {latitude: null, longitude: null },
   currentPositionTimeStamp: null,
-  previousPositionTimeStamp: null
+  previousPositionTimeStamp: null,
+  currentPositionHeading: 0
 };
 
 export function navReducer(state = NavState, action: NavActions): NavInterface {
@@ -52,11 +53,13 @@ export function navReducer(state = NavState, action: NavActions): NavInterface {
       return {...state, isShowRouteSummary};
     }
     case navActionTypes.SET_CURRENT_POSITION: {
-      const currentPosition = (action as SetCurrentPositionAction).payload.currentPosition;
+      const payload = (action as SetCurrentPositionAction).payload;
+      const currentPosition = payload.currentPosition;
+      const currentPositionHeading = payload.heading;
       const previousPosition = state.currentPosition;
       const previousPositionTimeStamp = state.currentPositionTimeStamp;
       const currentPositionTimeStamp = Date.now();
-      return { ...state, currentPosition, previousPositionTimeStamp, currentPositionTimeStamp, previousPosition };
+      return { ...state, currentPosition, previousPositionTimeStamp, currentPositionTimeStamp, previousPosition, currentPositionHeading };
     }
     case navActionTypes.SET_NEXT_WAYPOINT_INDEX: {
       const nextWaypointIndex = (action as SetNextWaypointIndexAction).payload.nextWaypointIndex;
