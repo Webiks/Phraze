@@ -1,11 +1,15 @@
 .controlBarContainer {
   display: flex;
+  align-content: space-between;
 }
 .remaining-distance-display-container {
   display: flex;
   flex-direction: column;
   align-content: space-around;
   position: relative;
+  margin-left: 5px;
+  vertical-align: center;
+  font-size: x-large;
 }
 
 .remain-span {
