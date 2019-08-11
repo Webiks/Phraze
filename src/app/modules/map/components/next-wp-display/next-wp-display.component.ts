@@ -29,7 +29,7 @@ export class NextWpDisplayComponent implements OnInit {
           entity: {
             id: 'nextWayPoint',
             position: Cesium.Cartesian3.fromDegrees(coords[1], coords[0], 10.0 ),
-            image: this.pinBuilder.fromText('WP', Cesium.Color.BLACK, 48).toDataURL(),
+            image: this.pinBuilder.fromText('wp', Cesium.Color.BLACK, 48).toDataURL(),
             verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
           },
           actionType: ActionType.ADD_UPDATE

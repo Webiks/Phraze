@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { SetNextWaypointIndexAction, SetPhrazeStateAction, SetShowSearchAction } from '../../store/nav.actions';
-import { distanceToEndpointSelector, routePointsSelector } from '../../store/nav.selectors';
-import { tap } from 'rxjs/operators';
-import { PhrazeState } from '../../interface/nav.interface';
+import { SetShowSearchAction } from '../../store/nav.actions';
+import { distanceToEndpointSelector } from '../../store/nav.selectors';
 
 @Component({
   selector: 'app-control-bar',
