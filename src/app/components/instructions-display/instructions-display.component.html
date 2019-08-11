@@ -1,4 +1,4 @@
-<div class="instructions-container">
+<div class="instructions-container" *ngIf="(phrazeState$ | async) == moshe">
   in {{distanceToNextWaypoint$ | async}} {{nextWaypointManeuver$ | async}} to {{nextWaypointName$ | async}}
 </div>
 

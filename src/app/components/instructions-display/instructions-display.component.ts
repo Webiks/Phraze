@@ -19,6 +19,8 @@ export class InstructionsDisplayComponent implements OnInit {
   nextWaypoint$;
   nextWaypointManeuver$;
   nextWaypointName$;
+  phrazeState$;
+  moshe = PhrazeState.NAVIGATION;
 
   constructor(private store: Store<any>) {
   }
@@ -26,6 +28,7 @@ export class InstructionsDisplayComponent implements OnInit {
   ngOnInit() {
 
     this.distanceToNextWaypoint$ = this.store.pipe(select(nextWaypointDistanceSelector));
+    this.phrazeState$ = this.store.pipe(select(phrazeStateSelector));
 
     this.nextWaypoint$ = this.store.pipe(select(nextWaypointIndexSelector),
       withLatestFrom(this.store.pipe(select(routeDetailsSelector)), this.store.pipe(select(phrazeStateSelector))),

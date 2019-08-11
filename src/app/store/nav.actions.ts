@@ -78,7 +78,7 @@ export class SetIsNextWpNotifiedAction implements Action {
   }
 }
 
-export interface PlayVoiceWpNotificationPayload {distanceNotification: number; }
+export interface PlayVoiceWpNotificationPayload {distanceNotification: number; isFinalDestination: boolean; }
 export class PlayVoiceWpNotificationAction implements Action {
   type = navActionTypes.PLAY_VOICE_WP_NOTIFICATION;
   constructor(public payload: PlayVoiceWpNotificationPayload) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { navActionTypes } from '../../store/nav.actions';
+import { navActionTypes, PlayVoiceWpNotificationAction, PlayVoiceWpNotificationPayload } from '../../store/nav.actions';
 import { tap, withLatestFrom } from 'rxjs/operators';
 import { getNavState } from '../../store/nav.selectors';
 
@@ -16,9 +16,15 @@ export class InstructionsVoiceComponent implements OnInit {
     ofType(navActionTypes.PLAY_VOICE_WP_NOTIFICATION),
     withLatestFrom(this.store.pipe(select(getNavState))),
     tap(([playVoiceAction, stateData]) => {
-      const instructionText = `in ${(<any>playVoiceAction).payload.distanceNotification} meters
-       ${stateData.routeDetails.routeLegs[stateData.nextWaypointIndex].maneuverType} to
-       ${stateData.routeDetails.routeLegs[stateData.nextWaypointIndex].name}`;
+      const payload = (playVoiceAction as PlayVoiceWpNotificationAction).payload;
+      let instructionText;
+      if (payload.isFinalDestination) {
+        instructionText = `You have arrived at your destination`;
+      } else {
+        instructionText = `in ${payload.distanceNotification} meters
+        ${stateData.routeDetails.routeLegs[stateData.nextWaypointIndex].maneuverType} to
+        ${stateData.routeDetails.routeLegs[stateData.nextWaypointIndex].name}`;
+      }
       this.speak(instructionText);
     })
   ).subscribe();
@@ -35,6 +41,7 @@ export class InstructionsVoiceComponent implements OnInit {
     msg.text = text;
     msg.volume = 100;
     msg.rate = 1.7;
+    window.speechSynthesis.cancel();
     window.speechSynthesis.speak(msg);
   }
 

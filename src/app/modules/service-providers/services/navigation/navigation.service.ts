@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { lineSlice, lineString, nearestPointOnLine, point, length } from '@turf/turf';
+import { length, lineSlice, lineString, nearestPointOnLine, point } from '@turf/turf';
 import {
-  currentPositionSelector, getNavState,
+  currentPositionSelector,
+  getNavState,
   nextWaypointIndexSelector,
   routeDetailsSelector,
   routePointsSelector
@@ -13,8 +14,10 @@ import {
   SetDistanceToEndpointAction,
   SetIsNextWpNotifiedAction,
   SetNextWaypointDistanceAction,
-  SetNextWaypointIndexAction
+  SetNextWaypointIndexAction,
+  SetPhrazeStateAction
 } from '../../../../store/nav.actions';
+import { PhrazeState } from '../../../../interface/nav.interface';
 
 
 @Injectable({
@@ -56,7 +59,13 @@ export class NavigationService {
           point(routeDetails.routeLegs[newNextWpIndex].coords),
           lineString(routePoints));
         const distanceToNextWp = length(lineToNextWp) * 1000;
+        const distanceFromEndPoint = 40;
         this.store.dispatch(new SetNextWaypointDistanceAction({ nextWaypointDistance: distanceToNextWp }));
+        if ((nextWpIndex === (routeDetails.routeLegs.length - 1)) && distanceToNextWp <= distanceFromEndPoint) {
+          console.log('you have arrived at your destination');
+          this.store.dispatch(new PlayVoiceWpNotificationAction({distanceNotification: 0, isFinalDestination: true}));
+          this.store.dispatch(new SetPhrazeStateAction({phrazeState: PhrazeState.IDLE}));
+        }
       }),
       withLatestFrom(this.store.pipe(select(getNavState))),
       filter(([[[currentPosition, routePoints], nextWpIndex, routeDetails], stateData]) => stateData.previousPosition !== null &&
@@ -84,7 +93,7 @@ export class NavigationService {
         if (stateData.nextWaypointDistance <= preNotificationDistance) {
           const distanceNotification = Math.min(preManeuverDistance, stateData.nextWaypointDistance);
           this.store.dispatch(new SetIsNextWpNotifiedAction({ isNextWpNotified: true }));
-          this.store.dispatch(new PlayVoiceWpNotificationAction({distanceNotification}));
+          this.store.dispatch(new PlayVoiceWpNotificationAction({distanceNotification, isFinalDestination: false}));
         }
       })
     ).subscribe();
