@@ -57,7 +57,7 @@ export class RouteSummaryDisplayComponent implements OnInit {
       window.removeEventListener('message', handleGetRouteCallback);
       window.postMessage({
           type: 'playRoute',
-          playbackRate: 5
+          playbackRate: 2.3
         },
         '*');
     }

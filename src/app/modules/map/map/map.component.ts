@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MapLayerProviderOptions, MapsManagerService, ViewerConfiguration } from 'angular-cesium';
+
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, AfterViewInit {
 
   mapLayerProviderOptions = MapLayerProviderOptions;
 
@@ -61,6 +62,7 @@ export class MapComponent implements OnInit {
      Cesium.Ion.defaultAccessToken = this.ionToken;
      viewerConfiguration.viewerOptions = this.viewerConfigurationOptions;
      this.mapsManagerService = mapsManagerService;
+
   }
 
 
@@ -70,9 +72,23 @@ export class MapComponent implements OnInit {
     this.getLocation();
   }
 
+  ngAfterViewInit() {
+    this.addTileset();
+  }
+
   goToCurrentLocation() {
     this.viewer = this.mapsManagerService.getMap(this.mapId).getCesiumViewer();
     navigator.geolocation.getCurrentPosition(this.flyToPosition.bind(this));
+  }
+
+  addTileset() {
+    this.viewer = this.mapsManagerService.getMap(this.mapId).getCesiumViewer();
+   const tileset = this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+      url: '../../../../assets/models/CenterTLV/tileset.json'
+    }));
+   tileset.style = new Cesium.Cesium3DTileStyle({
+     color: "color('white',0.5)"
+   });
   }
 
   flyToPosition(position) {
