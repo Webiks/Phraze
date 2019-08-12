@@ -84,7 +84,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   addTileset() {
     this.viewer = this.mapsManagerService.getMap(this.mapId).getCesiumViewer();
    const tileset = this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
-      url: '../../../../assets/models/CenterTLV/tileset.json'
+      url: './assets/models/CenterTLV/tileset.json'
     }));
    tileset.style = new Cesium.Cesium3DTileStyle({
      color: "color('white',0.5)"
