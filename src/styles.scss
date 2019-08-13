@@ -1,12 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 
-html, body {
-  height: 100%;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
+
 
 
 
@@ -46,6 +41,21 @@ $md-ams: (
     A700 : #000000,
   )
 );
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("/assets/fonts/montserrat/Montserrat-Regular.ttf");
+}
+
+$main-font-family: Montserrat, Fallback, sans-serif;
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: $main-font-family;
+}
 
 $ams-app-primary: mat-palette($md-ams);
 $ams-app-accent:  mat-palette($md-ams, A200, A100, A400);

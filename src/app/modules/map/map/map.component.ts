@@ -42,7 +42,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     animation: false,
     frameState: {scene: {creditDisplay: false}},
     terrainProviderViewModels: [],
-    baseLayerPicker: false,
+    baseLayerPicker: true,
     infoBox: false,
     skyAtmosphere: false,
     homeButton: false,
