@@ -51,6 +51,14 @@ export class PositionDisplayComponent implements OnInit, AfterViewInit {
     const range = 500;
     const cameraOrientation = new Cesium.HeadingPitchRange(cameraHeading, pitch, range);
     this.viewer.camera.lookAt(entityPosition, cameraOrientation);
+    // this.viewer.camera.setView({
+    //   destination: this.viewer.camera.position,
+    //   orientation: {
+    //     heading: this.viewer.camera.heading,
+    //     pitch: this.viewer.camera.pitch,
+    //     roll: this.viewer.camera.roll
+    //   }
+    // })
   }
 
   ngOnInit() {
