@@ -24,7 +24,7 @@ export class PositionDisplayComponent implements OnInit, AfterViewInit {
     this.postionUpdate$ = this.store.pipe(select(currentPositionSelector),
       combineLatest(this.store.pipe(select(phrazeStateSelector)), this.store.pipe(select(currentPositionHeadingSelector))),
       filter(([ position, phrazeState, heading ]) => position.latitude !== null && phrazeState !== PhrazeState.PREVIEW),
-      tap(([ position, state, heading ]) => this.flyToPosition(position, heading)),
+      tap(([ position, state, heading ]) => this.flyToPosition(position, state, heading)),
       map(([ position, state, heading ]) => {
         const modelHeading = 180;
         const entityPosition = Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude);
@@ -44,21 +44,19 @@ export class PositionDisplayComponent implements OnInit, AfterViewInit {
     this.postionUpdate$.subscribe(); // TODO unsubscribe
   }
 
-  flyToPosition(position: GeoPosition, heading: number) {
+  flyToPosition(position: GeoPosition, state: PhrazeState, heading: number) {
     const entityPosition = Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude);
     const cameraHeading = Cesium.Math.toRadians(heading || 0);
     const pitch = Cesium.Math.toRadians(-30);
     const range = 500;
     const cameraOrientation = new Cesium.HeadingPitchRange(cameraHeading, pitch, range);
-    this.viewer.camera.lookAt(entityPosition, cameraOrientation);
-    // this.viewer.camera.setView({
-    //   destination: this.viewer.camera.position,
-    //   orientation: {
-    //     heading: this.viewer.camera.heading,
-    //     pitch: this.viewer.camera.pitch,
-    //     roll: this.viewer.camera.roll
-    //   }
-    // })
+    if (state === PhrazeState.NAVIGATION) {
+      this.viewer.camera.lookAt(entityPosition, cameraOrientation);
+    } else {
+      this.viewer.camera.setView({
+        destination: Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude, 1000)
+        });
+    }
   }
 
   ngOnInit() {
