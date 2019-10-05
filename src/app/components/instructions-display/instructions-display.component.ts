@@ -19,13 +19,17 @@ export class InstructionsDisplayComponent implements OnInit {
   nextWaypoint$;
   nextWaypointManeuver$;
   nextWaypointName$;
+  phrazeState$;
+  navStateValue = PhrazeState.NAVIGATION;
 
   constructor(private store: Store<any>) {
   }
 
   ngOnInit() {
 
-    this.distanceToNextWaypoint$ = this.store.pipe(select(nextWaypointDistanceSelector));
+    this.distanceToNextWaypoint$ = this.store.pipe(select(nextWaypointDistanceSelector),
+      map(distance => Math.round(distance)));
+    this.phrazeState$ = this.store.pipe(select(phrazeStateSelector));
 
     this.nextWaypoint$ = this.store.pipe(select(nextWaypointIndexSelector),
       withLatestFrom(this.store.pipe(select(routeDetailsSelector)), this.store.pipe(select(phrazeStateSelector))),

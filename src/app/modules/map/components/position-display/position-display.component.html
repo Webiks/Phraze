@@ -1,8 +1,16 @@
 <ac-layer acFor="let pos of postionUpdate$" [context]="this">
-  <ac-billboard-primitive-desc props="{
-    position: pos.position,
-    image: './assets/images/jeep.svg',
-    scale: 1.5
-  }">
-  </ac-billboard-primitive-desc>
+<!--  <ac-billboard-primitive-desc props="{-->
+<!--    position: pos.position,-->
+<!--    image: './assets/images/jeep.svg',-->
+<!--    scale: 1.5-->
+<!--  }">-->
+<!--  </ac-billboard-primitive-desc>-->
+  <ac-model-desc props="{
+     position: pos.position,
+     orientation: pos.orientation,
+     uri: './assets/models/scene.gltf',
+     scale: 6.0
+     }">
+  </ac-model-desc>
 </ac-layer>
+

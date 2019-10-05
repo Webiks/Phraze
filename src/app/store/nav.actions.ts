@@ -6,6 +6,7 @@ export enum navActionTypes {
   SET_ROUTE = 'SET ROUTE',
   SET_PHRAZE_STATE = 'SET PHRAZE STATE',
   SET_SHOW_SEARCH = 'SET SHOW SEARCH',
+  SET_SHOW_ROUTE_SUMMARY = 'SET SHOW ROUTE SUMMARY',
   SET_CURRENT_POSITION = 'SET CURRENT POSITION',
   SET_NEXT_WAYPOINT_INDEX = 'SET NEXT WAYPOINT INDEX',
   SET_NEXT_WAYPOINT_DISTANCE = 'SET NEXT WAYPOINT DISTANCE',
@@ -35,7 +36,14 @@ export class SetShowSearchAction implements Action {
   }
 }
 
-export interface SetCurrentPositionPayload {currentPosition: {latitude: number, longitude: number}; }
+export interface SetShowRouteSummaryPayload { isShowRouteSummary: boolean; }
+export class SetShowRouteSummaryAction implements Action {
+  type = navActionTypes.SET_SHOW_ROUTE_SUMMARY;
+  constructor(public payload: SetShowRouteSummaryPayload) {
+  }
+}
+
+export interface SetCurrentPositionPayload {currentPosition: {latitude: number, longitude: number}; heading: number; }
 export class SetCurrentPositionAction implements Action {
   type = navActionTypes.SET_CURRENT_POSITION;
   constructor(public payload: SetCurrentPositionPayload) {
@@ -70,7 +78,7 @@ export class SetIsNextWpNotifiedAction implements Action {
   }
 }
 
-export interface PlayVoiceWpNotificationPayload {distanceNotification: number; }
+export interface PlayVoiceWpNotificationPayload {distanceNotification: number; isFinalDestination: boolean; }
 export class PlayVoiceWpNotificationAction implements Action {
   type = navActionTypes.PLAY_VOICE_WP_NOTIFICATION;
   constructor(public payload: PlayVoiceWpNotificationPayload) {
@@ -80,6 +88,7 @@ export class PlayVoiceWpNotificationAction implements Action {
 export type NavActions =  SetRouteAction |
                           SetPhrazeStateAction |
                           SetShowSearchAction |
+                          SetShowRouteSummaryAction |
                           SetCurrentPositionAction |
                           SetNextWaypointIndexAction |
                           SetNextWaypointDistanceAction |

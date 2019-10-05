@@ -40,3 +40,7 @@ export function inflateBoundingBox(boundingBox: Array<number>, radiusM: number) 
   const maxLat = boundingBox[3];
   return [minLon - inflationFactor, minLat - inflationFactor, maxLon + inflationFactor, maxLat + inflationFactor];
 }
+
+export function toTimeString(seconds) {
+  return (new Date(seconds * 1000)).toUTCString().match(/(\d\d:\d\d:\d\d)/)[0];
+}

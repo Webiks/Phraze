@@ -1,14 +1,19 @@
 .controlBarContainer {
   display: flex;
+  align-content: space-between;
 }
 .remaining-distance-display-container {
   display: flex;
   flex-direction: column;
   align-content: space-around;
   position: relative;
+  margin-left: 8px;
+  vertical-align: center;
+  font-size: 14pt;
+}
+.search-button-container {
+  position: relative;
+  margin: 6px;
+  margin-left: 10px;
 }
 
-.remain-span {
-  position: absolute;
-  top: 50%;
-}

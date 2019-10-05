@@ -3,7 +3,7 @@ import { ActionType, MapsManagerService } from 'angular-cesium';
 import { Observable } from 'rxjs';
 import { combineLatest, filter, map, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { currentPositionSelector, phrazeStateSelector } from '../../../../store/nav.selectors';
+import { currentPositionHeadingSelector, currentPositionSelector, phrazeStateSelector } from '../../../../store/nav.selectors';
 import { GeoPosition, PhrazeState } from '../../../../interface/nav.interface';
 
 @Component({
@@ -22,16 +22,20 @@ export class PositionDisplayComponent implements OnInit, AfterViewInit {
   ) {
 
     this.postionUpdate$ = this.store.pipe(select(currentPositionSelector),
-      combineLatest(this.store.pipe(select(phrazeStateSelector))),
-      filter(([ position, phrazeState ]) => position.latitude !== null && phrazeState !== PhrazeState.PREVIEW),
-      map(([ position ]) => position),
-      tap(position => this.flyToPosition(position)),
-      map(position => {
+      combineLatest(this.store.pipe(select(phrazeStateSelector)), this.store.pipe(select(currentPositionHeadingSelector))),
+      filter(([ position, phrazeState, heading ]) => position.latitude !== null && phrazeState !== PhrazeState.PREVIEW),
+      tap(([ position, state, heading ]) => this.flyToPosition(position, state, heading)),
+      map(([ position, state, heading ]) => {
+        const modelHeading = 180;
+        const entityPosition = Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude);
+        const hpr = Cesium.HeadingPitchRoll.fromDegrees((heading || 0) + modelHeading, 0, 0);
+        const orientation = Cesium.Transforms.headingPitchRollQuaternion(entityPosition, hpr);
         return {
           id: 'currentPosition',
           entity: {
             id: 'currentPosition',
-            position: Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude, 10.0)
+            position: entityPosition,
+            orientation
           },
           actionType: ActionType.ADD_UPDATE
         };
@@ -40,11 +44,19 @@ export class PositionDisplayComponent implements OnInit, AfterViewInit {
     this.postionUpdate$.subscribe(); // TODO unsubscribe
   }
 
-  flyToPosition(position: GeoPosition) {
-    this.viewer.camera.setView({
-        destination: Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude, 1000.0)
-      }
-    );
+  flyToPosition(position: GeoPosition, state: PhrazeState, heading: number) {
+    const entityPosition = Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude);
+    const cameraHeading = Cesium.Math.toRadians(heading || 0);
+    const pitch = Cesium.Math.toRadians(-30);
+    const range = 500;
+    const cameraOrientation = new Cesium.HeadingPitchRange(cameraHeading, pitch, range);
+    if (state === PhrazeState.NAVIGATION) {
+      this.viewer.camera.lookAt(entityPosition, cameraOrientation);
+    } else {
+      this.viewer.camera.setView({
+        destination: Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude, 1000)
+        });
+    }
   }
 
   ngOnInit() {

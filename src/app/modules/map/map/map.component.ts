@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MapLayerProviderOptions, MapsManagerService, ViewerConfiguration } from 'angular-cesium';
+
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, AfterViewInit {
 
   mapLayerProviderOptions = MapLayerProviderOptions;
 
@@ -18,11 +19,15 @@ export class MapComponent implements OnInit {
     'CI6NjU0Miwic2NvcGVzIjpbImFzbCIsImFzciIsImFzdyIsImdjIl0sImFzc2V0cyI6WzIsM10sImlhdCI6MTU1MTM0NzUzNH0.iLuDmwFBzHKNiEIoYBakVCiwNS' +
     '1xZyen-2GJAZ9fjJk';
 
-  providerOptions = {
+  bingProviderOptions = {
     url: 'https://dev.virtualearth.net',
     key: 'AmJ0O28GqMP3Dh1xqajFAFMuKb9f0YCXtGWJ5G4NU_PeE899SYup3ngALmDschnu',
     DEFAULT_VIEW_FACTOR: 0,
+  };
 
+  mapBoxProviderOptions = {
+    url: 'https://api.mapbox.com/styles/v1/idanbarak/cj5s5klwq3e6s2rph9rke05gm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaWR' +
+      'hbmJhcmFrIiwiYSI6ImNpdmptNWVrZzAwOTkydGw1NmIxcHM2ZnoifQ.FZxE5OXjfpd6I3fuimotRw'
   };
 
   viewerConfigurationOptions = {
@@ -37,7 +42,7 @@ export class MapComponent implements OnInit {
     animation: false,
     frameState: {scene: {creditDisplay: false}},
     terrainProviderViewModels: [],
-    baseLayerPicker: false,
+    baseLayerPicker: true,
     infoBox: false,
     skyAtmosphere: false,
     homeButton: false,
@@ -57,6 +62,7 @@ export class MapComponent implements OnInit {
      Cesium.Ion.defaultAccessToken = this.ionToken;
      viewerConfiguration.viewerOptions = this.viewerConfigurationOptions;
      this.mapsManagerService = mapsManagerService;
+
   }
 
 
@@ -66,9 +72,23 @@ export class MapComponent implements OnInit {
     this.getLocation();
   }
 
+  ngAfterViewInit() {
+    this.addTileset();
+  }
+
   goToCurrentLocation() {
     this.viewer = this.mapsManagerService.getMap(this.mapId).getCesiumViewer();
     navigator.geolocation.getCurrentPosition(this.flyToPosition.bind(this));
+  }
+
+  addTileset() {
+    this.viewer = this.mapsManagerService.getMap(this.mapId).getCesiumViewer();
+   const tileset = this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+      url: './assets/models/CenterTLV/tileset.json'
+    }));
+   tileset.style = new Cesium.Cesium3DTileStyle({
+     color: "color('white',0.5)"
+   });
   }
 
   flyToPosition(position) {

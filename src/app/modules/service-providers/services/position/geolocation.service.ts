@@ -18,6 +18,7 @@ export class GeolocationService {
 
   setPosition(position) {
     this.store.dispatch(new SetCurrentPositionAction({currentPosition: {latitude: position.coords.latitude,
-                                                                                longitude: position.coords.longitude}}));
+                                                                                longitude: position.coords.longitude},
+                                                              heading: position.coords.heading}));
   }
 }

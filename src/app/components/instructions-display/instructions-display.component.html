@@ -1,4 +1,11 @@
-<div class="instructions-container">
-  in {{distanceToNextWaypoint$ | async}} {{nextWaypointManeuver$ | async}} to {{nextWaypointName$ | async}}
-</div>
 
+<div class="top-control-bar">
+  <div class="instructions-container" *ngIf="(phrazeState$ | async) == navStateValue">
+    in {{distanceToNextWaypoint$ | async}}m {{nextWaypointManeuver$ | async}} to {{nextWaypointName$ | async}}
+  </div>
+  <div class="github-icon-container">
+    <a href="https://github.com/Webiks/Phraze" target="_blank">
+      <img src="./assets/images/gitHub.png" height=30px title="github">
+    </a>
+  </div>
+</div>

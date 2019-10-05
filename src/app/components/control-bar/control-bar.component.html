@@ -1,12 +1,9 @@
 <div class="controlBarContainer">
   <div class="searchButtonContainer">
-    <button mat-raised-button (click)="openSearchPage()">Search</button>
+    <button mat-raised-button (click)="openSearchPage()" color="primary" >Search</button>
   </div>
-  <div class="settingsButtonContainer">
-    <button mat-raised-button (click)="startNavigation()">Start</button>
-  </div>
-  <div class="remaining-distance-display-container">
-    <span class="remain-span">{{distanceToEndpoint$ | async}} </span>
+  <div class="remaining-distance-display-container" *ngIf="distanceToEndpoint$ | async">
+      Remaining distance: {{distanceToEndpoint$ | async}}m
   </div>
 
 </div>

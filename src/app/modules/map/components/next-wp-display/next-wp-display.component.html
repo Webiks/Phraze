@@ -1,8 +1,8 @@
 <ac-layer acFor="let nextWp of nextWpUpdate$" [context]="this">
   <ac-billboard-primitive-desc props="{
     position: nextWp.position,
-    image: './assets/images/jeep.svg',
-    scale: 1.5
+    image: nextWp.image,
+    verticalOrigin: nextWp.verticalOrigin
   }">
   </ac-billboard-primitive-desc>
 </ac-layer>

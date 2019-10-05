@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { InstructionsDisplayComponent } from './components/instructions-display/instructions-display.component';
 import { InstructionsVoiceComponent } from './components/instructions-voice/instructions-voice.component';
 import { EffectsModule } from '@ngrx/effects';
+import { RouteSummaryDisplayComponent } from './components/route-summary-display/route-summary-display.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { EffectsModule } from '@ngrx/effects';
     SearchPageComponent,
     InstructionsDisplayComponent,
     InstructionsVoiceComponent,
+    RouteSummaryDisplayComponent,
 
   ],
   imports: [
