@@ -1,8 +1,6 @@
 # Phraze
 
-a Photo realistic navigation experience.  
-
-demo: https://webiks.github.io/Phraze/
+A photo realistic navigation experience.  
 
 ## How to run
 
